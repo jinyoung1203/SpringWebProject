@@ -16,6 +16,9 @@ import vo.UserVO;
 
 @Controller
 public class UserController {
+	// test
+	// test입니다!!!!!!
+
 	@Autowired
 	HttpServletRequest request;
 

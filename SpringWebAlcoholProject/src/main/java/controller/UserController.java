@@ -42,4 +42,14 @@ public class UserController {
 		return Common.User.VIEW_PATH + "user_list.jsp";
 	} // end of selectList()
 
+	@RequestMapping("/main.do")
+	public String main(){
+		return Common.Main.VIEW_PATH + "main.jsp";
+	} // end of main()
+
+	@RequestMapping("/login.do")
+	public String login(){
+		return Common.Main.VIEW_PATH + "pages-login.jsp";
+	}
+
 } // end of class

@@ -39,7 +39,7 @@
     <div class="d-flex align-items-center justify-content-between">
         <a href="#" class="logo d-flex align-items-center">
             <img src="${pageContext.request.contextPath}resources/upload/logo.jpg" alt="">
-            <span class="d-none d-lg-block">인류의 적, 모두 마셔 없애자.</span>
+            <span class="d-none d-lg-block">홈페이지 제목</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->

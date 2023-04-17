@@ -34,7 +34,7 @@ public class UserController {
 		System.out.println("Controller 생성자 : " + service);
 	} // end of constructor
 
-	@RequestMapping(value = { "/", "/user_list.do" })
+	@RequestMapping("/user_list.do")
 	public String selectList(Model model) {
 		List<UserVO> user_list = service.selectList();
 		model.addAttribute("user_list", user_list);
@@ -42,14 +42,6 @@ public class UserController {
 		return Common.User.VIEW_PATH + "user_list.jsp";
 	} // end of selectList()
 
-	@RequestMapping("/main.do")
-	public String main(){
-		return Common.Main.VIEW_PATH + "main.jsp";
-	} // end of main()
 
-	@RequestMapping("/login.do")
-	public String login(){
-		return Common.Main.VIEW_PATH + "pages-login.jsp";
-	}
 
 } // end of class

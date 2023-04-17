@@ -22,7 +22,7 @@
     <link href="${pageContext.request.contextPath}/resources/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="${pageContext.request.contextPath}resources/assets/css/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/assets/css/style.css" rel="stylesheet">
 
     <!-- =======================================================
     * Template Name: NiceAdmin
@@ -39,7 +39,7 @@
     <div class="d-flex align-items-center justify-content-between">
         <a href="#" class="logo d-flex align-items-center">
             <img src="${pageContext.request.contextPath}resources/upload/logo.jpg" alt="">
-            <span class="d-none d-lg-block">인류의 적, 모두 마셔 없애자.</span>
+            <span class="d-none d-lg-block">홈페이지 제목</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -203,10 +203,10 @@
         class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
-<script src="${pageContext.request.contextPath}resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Template Main JS File -->
-<script src="${pageContext.request.contextPath}resources/assets/js/main.js"></script>
+<script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
 </body>
 </html>

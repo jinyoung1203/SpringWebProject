@@ -4,5 +4,9 @@ public class Common {
 	public static class User{
 		public static final String VIEW_PATH = "/WEB-INF/views/user/";
 	} // end of User class
+
+	public static class Main{
+		public static final String VIEW_PATH = "/WEB-INF/views/main/";
+	} // end of Main class
 	
 } // end of class

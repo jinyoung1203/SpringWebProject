@@ -1,6 +1,6 @@
-// email(ID) validity
-document.querySelector("#user_email").addEventListener("input", function () {
-    let isEmailValid = true;
+let isEmailValid;
+function email_check(event) {
+    isEmailValid = true;
     let input_user_email = this.value;
     let check_user_email = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 
@@ -13,12 +13,16 @@ document.querySelector("#user_email").addEventListener("input", function () {
     } else {
         this.classList.remove("is-valid");
         this.classList.add("is-invalid");
+        event.stopPropagation();
     }
-}); // end of email(ID) validity
+} // end of email_check()
 
-// pwd validity
-document.querySelector("#user_pwd").addEventListener("input", function () {
-    let isPwdValid = true;
+// email(ID) validity
+document.querySelector("#user_email").addEventListener("input", email_check);
+
+let isPwdValid;
+function pwd_check() {
+    isPwdValid = true;
     let input_user_pwd = this.value;
     let check_user_pwd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,16}/;
 
@@ -33,11 +37,14 @@ document.querySelector("#user_pwd").addEventListener("input", function () {
         this.classList.remove("is-valid");
         this.classList.add("is-invalid");
     }
-}); // end of pwd validity
+} // end of pwd_check()
 
-// pwd_check validity
-document.querySelector("#user_pwd_check").addEventListener("input", function () {
-    let isPwdCheckValid = true;
+// pwd validity
+document.querySelector("#user_pwd").addEventListener("input", pwd_check);
+
+let isPwdCheckValid;
+function pwd_check_check() {
+    isPwdCheckValid = true;
     let input_user_pwd_check = this.value;
     let input_user_pwd = document.getElementById("user_pwd").value;
 
@@ -52,11 +59,14 @@ document.querySelector("#user_pwd_check").addEventListener("input", function () 
         this.classList.remove("is-valid");
         this.classList.add("is-invalid");
     }
-}); // end of pwd_check validity
+} // end of pwd_check_check()
 
-// user_name validity
-document.querySelector("#user_name").addEventListener("input", function () {
-    let isNameValid = true;
+// pwd_check validity
+document.querySelector("#user_pwd_check").addEventListener("input", pwd_check_check);
+
+let isNameValid;
+function name_check() {
+    isNameValid = true;
     let input_user_name = this.value;
     let check_user_name = /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/;
     if (!check_user_name.test(input_user_name)) {
@@ -71,14 +81,17 @@ document.querySelector("#user_name").addEventListener("input", function () {
         this.classList.add("is-invalid");
     }
 
-}); // end of user_name validity
+} // end of name_check()
 
-// user_birthdate validity
-document.querySelector("#user_birthdate").addEventListener("input", function (){
-    let isBirthDate = true;
+// user_name validity
+document.querySelector("#user_name").addEventListener("input", name_check);
+
+let isBirthDate;
+function birthdate_check() {
+    isBirthDate = true;
     let input_user_birthdate = this.value;
     let check_user_birthdate = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
-    if(!check_user_birthdate.test(input_user_birthdate)){
+    if (!check_user_birthdate.test(input_user_birthdate)) {
         isBirthDate = false;
     }
 
@@ -89,37 +102,33 @@ document.querySelector("#user_birthdate").addEventListener("input", function (){
         this.classList.remove("is-valid");
         this.classList.add("is-invalid");
     }
+} // end of birthdate_check()
 
-
-}); // end of user_birthdate validity
+// user_birthdate validity
+document.querySelector("#user_birthdate").addEventListener("input", birthdate_check);
 
 function send(f){
-    (() => {
-        'use strict'
+    const forms = document.querySelectorAll('.needs-validation');
 
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        const forms = document.querySelectorAll('.needs-validation')
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
 
-        // Loop over them and prevent submission
-        Array.from(forms).forEach(form => {
-            form.addEventListener('submit', event => {
-                if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
+            // form.classList.add()
+        }, false)
+    })
 
-                form.classList.add('was-validated')
-
-            }, false)
-
-
-        })
-    })()
-    f.action = "register_detail.do";
+    f.action = "register_detail_form.do";
     f.method = "post";
     f.submit();
 
-
 } // end of send()
+
+
+
+
 
 

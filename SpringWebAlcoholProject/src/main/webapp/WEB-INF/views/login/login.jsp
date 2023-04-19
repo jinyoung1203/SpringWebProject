@@ -94,7 +94,7 @@
                                         <button class="btn btn-dark w-100" type="submit">Login</button>
                                     </div>
                                     <div class="col-12">
-                                        <p class="small mb-0">Don't have account? <a href="register.do">Create an account</a></p>
+                                        <p class="small mb-0">Don't have account? <a href="register_form.do">Create an account</a></p>
                                     </div>
                                 </form>
 

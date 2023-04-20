@@ -8,12 +8,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import service.IKakaoLoginService;
 import service.TotalService;
 import util.Common;
 import vo.UserVO;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class LoginController {
@@ -23,11 +27,15 @@ public class LoginController {
     private NaverLoginBO naverLoginBO;
     private String apiResult = null;
 
+    private IKakaoLoginService iKakaoLoginService;
+
     @Autowired
-    public LoginController(TotalService service, NaverLoginBO naverLoginBO) {
+    public LoginController(TotalService service, NaverLoginBO naverLoginBO, IKakaoLoginService iKakaoLoginService) {
         this.service = service;
         this.naverLoginBO = naverLoginBO;
+        this.iKakaoLoginService = iKakaoLoginService;
         System.out.println("naverLoginBO 객체 : " + naverLoginBO);
+        System.out.println("iKakaoLoginService 객체 : " + iKakaoLoginService);
     } // end of constructor
 
     @RequestMapping(value = "/login.do", method = {RequestMethod.GET, RequestMethod.POST})
@@ -57,6 +65,25 @@ public class LoginController {
         return Common.Login.VIEW_PATH + "callback.jsp";
     } // end of callback()
 
+
+    @RequestMapping(value = "/kakaoLogin.do", method = RequestMethod.GET)
+    public ModelAndView kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Throwable {
+        // 1. 카카오톡에 사용자 코드 받기(login.jsp의 카카오로그인 버튼에 href 경로 있음)
+        System.out.println("code : " + code);
+
+        // 2. 받은 code를 iKakaoS.getAccessToken로 보냄 ###access_Token###로 찍어서 잘 나오면은 다음단계진행
+        String access_token = iKakaoLoginService.getAccessToken(code);
+        System.out.println("###access_token### : " + access_token);
+        // 위의 access_Token 받는 걸 확인한 후에 밑에 진행
+
+        // 3. 받은 access_Token를 iKakaoLoginService.getUserInfo로 보냄 userInfo받아옴, userInfo에 nickname, email정보가 담겨있음
+        HashMap<String, Object> userInfo =  iKakaoLoginService.getUserInfo(access_token);
+        System.out.println("###nickname#### : " + userInfo.get("nickname"));
+        System.out.println("###email#### : " + userInfo.get("email"));
+
+        return null;
+    } // end of kakaoLogin()
+
     @RequestMapping("/register_form.do")
     public String register_form() {
 
@@ -74,9 +101,9 @@ public class LoginController {
         int res = service.insert(vo);
         int check = 0;
         // 회원가입 성공, 실패, 첫 로드 확인
-        if(res == 1){
+        if (res == 1) {
             check = 1;
-        } else{
+        } else {
             check = 2;
         }
         model.addAttribute("check", check);
@@ -84,13 +111,10 @@ public class LoginController {
     } // end of register()
 
 
-
     @RequestMapping("/test.do")
     public String test() {
         return Common.Login.VIEW_PATH + "test.jsp";
     }
-
-
 
 
 } // end of class

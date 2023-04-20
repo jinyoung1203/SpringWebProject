@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="u">
 	<insert id="user_insert" parameterType="vo.UserVO" >
-		insert into user values(
+		insert into USER1 values(
 		                        seq_user_idx.nextVal,
 		                        #{user_name},
 		                        #{user_pwd},

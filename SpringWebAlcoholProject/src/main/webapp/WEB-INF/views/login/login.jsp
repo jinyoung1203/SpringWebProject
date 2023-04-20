@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 
 <head>
@@ -17,10 +18,10 @@
     <!-- Vendor CSS Files -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-   <%-- <link href="${pageContext.request.contextPath}/resources/assets/vendor/bootstrap/css/bootstrap.min.css"
-          rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/resources/assets/vendor/bootstrap-icons/bootstrap-icons.css"
-          rel="stylesheet">--%>
+    <%-- <link href="${pageContext.request.contextPath}/resources/assets/vendor/bootstrap/css/bootstrap.min.css"
+           rel="stylesheet">
+     <link href="${pageContext.request.contextPath}/resources/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+           rel="stylesheet">--%>
 
     <!-- Template Main CSS File -->
     <link href="${pageContext.request.contextPath}/resources/assets/css/style.css" rel="stylesheet">
@@ -28,6 +29,51 @@
 </head>
 
 <body>
+<c:if test="${check eq 1}">
+    <button type="button" id="modalBtn" class="btn btn-primary visually-hidden" data-bs-toggle="modal"
+            data-bs-target="#basicModal">
+    </button>
+    <div class="modal" id="basicModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">회원가입정보</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    회원가입에 성공했습니다. 로그인 해주세요.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Basic Modal-->
+</c:if>
+
+<c:if test="${check eq 2}">
+    <button type="button" id="modalBtn" class="btn btn-primary visually-hidden" data-bs-toggle="modal"
+            data-bs-target="#basicModal">
+    </button>
+    <div class="modal" id="basicModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">회원가입정보</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    회원가입에 실패했습니다. 다시 회원가입을 진행해주세요.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Basic Modal-->
+</c:if>
 
 <main>
     <div class="container">
@@ -54,8 +100,8 @@
                                 </div>
 
                                 <form class="row g-3 needs-validation" novalidate>
-                                    <div class="col-12">
-                                        <button class="btn btn-success w-100">Naver로 시작하기</button>
+                                    <div class="col-12" id="naver_id_login">
+                                        <button type="button" class="btn btn-success w-100" onclick="location.href='${naverUrl}'">Naver로 시작하기</button>
                                     </div>
 
                                     <div class="col-12">
@@ -94,7 +140,8 @@
                                         <button class="btn btn-dark w-100" type="submit">Login</button>
                                     </div>
                                     <div class="col-12">
-                                        <p class="small mb-0">Don't have account? <a href="register_form.do">Create an account</a></p>
+                                        <p class="small mb-0">Don't have account? <a href="register_form.do">Create an
+                                            account</a></p>
                                     </div>
                                 </form>
 
@@ -119,9 +166,13 @@
 
 <!-- Vendor JS Files -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
 <%--<script src="${pageContext.request.contextPath}/resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>--%>
-
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/register/login.js"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js"
+        charset="utf-8"></script>
 </body>
 
 </html>

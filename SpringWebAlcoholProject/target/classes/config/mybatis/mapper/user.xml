@@ -3,12 +3,20 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="u">
-	
-	<select id="user_list" resultType="user">
-		select * from user2
-	</select>
-	
-	
+	<insert id="user_insert" parameterType="vo.UserVO" >
+		insert into USER1 values(
+		                        seq_user_idx.nextVal,
+		                        #{user_name},
+		                        #{user_pwd},
+		                        #{user_phonenumber},
+		                        #{user_email},
+		                        #{user_birthdate},
+		                        #{user_addr},
+		                        sysdate,
+		                        #{user_nickname}
+							   )
+	</insert>
+
 </mapper>
 
 

@@ -1,45 +1,53 @@
 package controller;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import kakaologin.KakaoLoginBO;
 import naverlogin.NaverLoginBO;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-import service.IKakaoLoginService;
 import service.TotalService;
 import util.Common;
 import vo.UserVO;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 public class LoginController {
+
+    @Autowired
+    private HttpServletRequest request;
+
+    private HttpSession session;
 
     private TotalService service;
 
     private NaverLoginBO naverLoginBO;
     private String apiResult = null;
 
-    private IKakaoLoginService iKakaoLoginService;
+    private KakaoLoginBO kakaoLoginBO;
 
     @Autowired
-    public LoginController(TotalService service, NaverLoginBO naverLoginBO, IKakaoLoginService iKakaoLoginService) {
+    public LoginController(TotalService service, NaverLoginBO naverLoginBO, KakaoLoginBO kakaoLoginBO, HttpSession session) {
+        this.session = session;
         this.service = service;
         this.naverLoginBO = naverLoginBO;
-        this.iKakaoLoginService = iKakaoLoginService;
+        this.kakaoLoginBO = kakaoLoginBO;
         System.out.println("naverLoginBO 객체 : " + naverLoginBO);
-        System.out.println("iKakaoLoginService 객체 : " + iKakaoLoginService);
+        System.out.println("kakaoLoginBO 객체 : " + kakaoLoginBO);
     } // end of constructor
 
     @RequestMapping(value = "/login.do", method = {RequestMethod.GET, RequestMethod.POST})
-    public String login(Model model, HttpSession session) {
+    public String login(Model model) {
+        session = request.getSession();
+
         /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
         String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
 
@@ -49,40 +57,85 @@ public class LoginController {
 
         // 네이버
         model.addAttribute("naverUrl", naverAuthUrl);
+        // 카카오 URL
+        String kakaoAuthUrl = kakaoLoginBO.getAuthorizationUrl(session);
+        System.out.println("카카오 : " + kakaoAuthUrl);
+        model.addAttribute("kakaoUrl", kakaoAuthUrl);
 
         return Common.Login.VIEW_PATH + "login.jsp";
     } // end of login()
 
-    @RequestMapping(value = "/navarCallback.do", method = {RequestMethod.GET, RequestMethod.POST})
-    public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException {
-        System.out.println("callBack 실행됨");
+    @RequestMapping(value = "/callback.do", method = {RequestMethod.GET, RequestMethod.POST})
+    public String naverCallback(Model model, @RequestParam String code, @RequestParam String state) throws Exception {
+        System.out.println("naver callBack 실행됨");
+        // System.out.println(code);
+        // System.out.println(state);
         OAuth2AccessToken oauthToken;
         oauthToken = naverLoginBO.getAccessToken(session, code, state);
         // 로그인 사용자 정보를 읽어온다.
         apiResult = naverLoginBO.getUserProfile(oauthToken);
-        model.addAttribute("model", apiResult);
 
-        return Common.Login.VIEW_PATH + "callback.jsp";
+        JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObj;
+
+        jsonObj = (JSONObject) jsonParser.parse(apiResult);
+        JSONObject response_obj = (JSONObject) jsonObj.get("response");
+
+        // 프로필 조회
+        String email = (String) response_obj.get("email");
+        String name = (String) response_obj.get("name");
+
+        // 세션에 사용자 정보 등록
+        model.addAttribute("signIn", apiResult);
+        model.addAttribute("naver_email", email);
+        model.addAttribute("naver_name", name);
+
+        return "redirect:/naverLoginSuccess.do";
     } // end of callback()
 
+    @RequestMapping("/naverLoginSuccess.do")
+    public String naverLoginSuccess(Model model, String apiResult, String email, String name) {
+        model.addAttribute("signIn", apiResult);
+        model.addAttribute("naver_email", email);
+        model.addAttribute("naver_name", name);
 
-    @RequestMapping(value = "/kakaoLogin.do", method = RequestMethod.GET)
-    public ModelAndView kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Throwable {
-        // 1. 카카오톡에 사용자 코드 받기(login.jsp의 카카오로그인 버튼에 href 경로 있음)
-        System.out.println("code : " + code);
+        return Common.Login.VIEW_PATH + "callback.jsp";
+    } // end of naverLoginSuccess()
 
-        // 2. 받은 code를 iKakaoS.getAccessToken로 보냄 ###access_Token###로 찍어서 잘 나오면은 다음단계진행
-        String access_token = iKakaoLoginService.getAccessToken(code);
-        System.out.println("###access_token### : " + access_token);
-        // 위의 access_Token 받는 걸 확인한 후에 밑에 진행
+    @RequestMapping(value = "/kakaoCallback.do", method = {RequestMethod.GET, RequestMethod.POST})
+    public String kakaoCallback(Model model, @RequestParam String code, @RequestParam String state) throws Exception {
+        System.out.println("kakao callback 실행 됨");
+        OAuth2AccessToken oAuth2AccessToken;
+        oAuth2AccessToken = kakaoLoginBO.getAccessToken(session, code, state);
 
-        // 3. 받은 access_Token를 iKakaoLoginService.getUserInfo로 보냄 userInfo받아옴, userInfo에 nickname, email정보가 담겨있음
-        HashMap<String, Object> userInfo =  iKakaoLoginService.getUserInfo(access_token);
-        System.out.println("###nickname#### : " + userInfo.get("nickname"));
-        System.out.println("###email#### : " + userInfo.get("email"));
+        // 로그인 사용자 정보를 읽어옴
+        apiResult = kakaoLoginBO.getUserProfile(oAuth2AccessToken);
 
-        return null;
-    } // end of kakaoLogin()
+        JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObj;
+
+        jsonObj = (JSONObject) jsonParser.parse(apiResult);
+        JSONObject response_obj1 = (JSONObject) jsonObj.get("kakao_account");
+        JSONObject response_obj2 = (JSONObject) response_obj1.get("profile");
+
+        // 프로필 조회
+        String email = (String) response_obj1.get("email");
+        String name = (String) response_obj2.get("nickname");
+
+        // 세션에 사용자 정보 등록
+        session.setAttribute("signIn", apiResult);
+        session.setAttribute("email", email);
+        session.setAttribute("name", name);
+
+        return "redirct:/kakaoSuccess.do";
+    } // end of kakaocallback()
+
+    @RequestMapping("/kakaoSuccess.do")
+    public String kakaoSuccess(HttpServletRequest request) {
+
+        return Common.Login.VIEW_PATH + "kakaocallback.jsp";
+    } // end of kakaoSuccess()
+
 
     @RequestMapping("/register_form.do")
     public String register_form() {

@@ -22,16 +22,19 @@ public class NaverLoginBO {
     //state: 애플리케이션이 생성한 상태 토큰
     private final static String CLIENT_ID = "QxChI9FrJgEpwtAN3lqZ";
     private final static String CLIENT_SECRET = "grm_saXb8s";
-    private final static String REDIRECT_URI = "http://192.168.3.3:9090/navarCallback.do";
-    private final static String SESSION_STATE = "oauth_state";
+    private final static String REDIRECT_URI = "http://192.168.3.3:9090/callback.do";
+    private final static String SESSION_STATE = "oauth_state_naver";
     // 프로필 조회 API URL
     private final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";
 
-    // 네이버 아이디로 인증  URL 생성  Method
+    // 네이버 아이디로 인증  URL 생성 Method
     public String getAuthorizationUrl(HttpSession session){
+
         // 세션 유효성 검증을 위하여 난수를 생성
         String state = generateRandomString();
         // 생성한 난수 값을 session에 저장
+        System.out.println("----- getAuthorizationUrl 메서드 -----");
+        System.out.println("state : " + state);
         setSession(session, state);
 
         // Scribe에서 제공하는 인증 URL 생성 기능을 이용하여 네이버 아이디 로그인 인증 URL 생성
@@ -48,6 +51,9 @@ public class NaverLoginBO {
     public OAuth2AccessToken getAccessToken(HttpSession session, String code, String state) throws IOException {
         // Callback으로 전달받은 세션검증용 난수값과 세션에 저장되어 있는 값이 일치하는지 확인
         String sessionState = getSession(session);
+        System.out.println("------ getAccessToken 메서드 ------");
+        System.out.println("sessionState : " + sessionState);
+        System.out.println("state : " + state);
         if(StringUtils.pathEquals(sessionState, state)){
             OAuth20Service oauthService = new ServiceBuilder()
                     .apiKey(CLIENT_ID)
@@ -55,11 +61,12 @@ public class NaverLoginBO {
                     .callback(REDIRECT_URI)
                     .state(state)
                     .build(NaverLoginApi.getInstance());
-
+            System.out.println("getAccessToken 실행 됨");
             // Scribe에서 제공하는 AccessToken 획득 기능으로 네이버 아이디 로그인 Access Token을 획득
             OAuth2AccessToken accessToken = oauthService.getAccessToken(code);
             return accessToken;
         }
+        System.out.println("getAccessToken() 메서드 if문 안으로 안들어감");
         return null;
     } // end of getAccessToken()
     

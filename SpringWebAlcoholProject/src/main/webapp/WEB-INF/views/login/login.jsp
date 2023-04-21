@@ -107,9 +107,8 @@
                                     </div>
 
                                     <div class="col-12">
-                                        <button class="btn btn-warning w-100" type="submit"
-                                                onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=3951fe07922dbdbd33f02177d181a7ba&redirect_uri=https://192.168.3.3:9090/kakaoLogin.do&response_type=code'">
-                                            Kakao로 시작하기
+                                        <button type="button" class="btn btn-warning w-100"
+                                                onclick="location.href='${kakaoUrl}'">Kakao로 시작하기
                                         </button>
                                     </div>
 

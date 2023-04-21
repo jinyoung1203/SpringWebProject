@@ -22,6 +22,7 @@
 	<!-- Auto-Detecting(자동 생성) -->
 	<context:component-scan base-package="dao, service, controller" />
 
+	<beans:bean id="naverLoginBO" class="naverlogin.NaverLoginBO" />
 
 	
 	

@@ -20,7 +20,7 @@ CREATE TABLE "Board" (
 CREATE sequence seq_user_idx;
 
 -- USER table 생성
-CREATE TABLE "USER" (
+CREATE TABLE "USER1" (
   "user_idx" number(6) primary key,
   "user_name" varchar2(50),
   "user_pwd" varchar2(30),

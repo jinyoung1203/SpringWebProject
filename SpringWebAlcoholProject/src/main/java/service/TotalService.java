@@ -24,6 +24,10 @@ public class TotalService {
 		return res;
 	} // end of insert()
 
+	public UserVO selectOne(String user_email){
+		UserVO vo = userDao.selectOne(user_email);
+		return vo;
+	} // end of selectOne()
 
 
 } // end of class

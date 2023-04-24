@@ -24,6 +24,13 @@ public class UserDAO {
 		return res;
 	} // end of insert()
 
+	public UserVO selectOne(String user_email){
+		UserVO vo = sqlSession.selectOne("u.user_selectOne", user_email);
+		return vo;
+	} // end of selectOne()
+
+
+
 
 
 } // end of class

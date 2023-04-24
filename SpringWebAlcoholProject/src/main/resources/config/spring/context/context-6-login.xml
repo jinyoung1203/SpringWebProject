@@ -8,9 +8,9 @@
 <!--		-->
 <!--	</bean>-->
 
-	<bean id = "kakaoLoginBO" class="kakaologin.KakaoLoginBO">
+	<!--<bean id = "kakaoLoginBO" class="kakaologin.KakaoLoginBO">
 
-	</bean>
+	</bean>-->
 	
 
 	

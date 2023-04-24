@@ -26,6 +26,7 @@
     <!-- Template Main CSS File -->
     <link href="${pageContext.request.contextPath}/resources/assets/css/style.css" rel="stylesheet">
 
+    <script src="${pageContext.request.contextPath}/resources/js/httpRequest.js"></script>
 </head>
 
 <body>
@@ -86,7 +87,7 @@
                         <div class="d-flex justify-content-center py-4">
                             <a href="main.do" class="logo d-flex align-items-center w-auto">
                                 <img src="${pageContext.request.contextPath}/resources/assets/img/logo.png" alt="">
-                                <span class="d-none d-lg-block">홈페이지 이름</span>
+                                <span class="d-none d-lg-block">홈페이지 이름/check="${check}"</span>
                             </a>
                         </div><!-- End Logo -->
 
@@ -135,13 +136,13 @@
 
                                     <div class="col-12">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="remember" value="true"
+                                            <input class="form-check-input" type="checkbox" value="true"
                                                    id="rememberMe">
                                             <label class="form-check-label" for="rememberMe">Remember me</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <button class="btn btn-dark w-100" type="submit">Login</button>
+                                        <input class="btn btn-dark w-100" type="button" onclick="user_login(this.form);" value="Login" />
                                     </div>
                                     <div class="col-12">
                                         <p class="small mb-0">Don't have account? <a href="register_form.do">Create an
@@ -173,10 +174,40 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
 <%--<script src="${pageContext.request.contextPath}/resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>--%>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/register/login.js"></script>
+<%--<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>--%>
+<%--<script src="${pageContext.request.contextPath}/resources/js/register/login.js"></script>--%>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js"
         charset="utf-8"></script>
+<script>
+    function user_login(f){
+        // alert("login() 실행됨");
+        let user_email = f.user_email.value.trim();
+        let user_pwd = f.user_pwd.value.trim();
+        // alert(user_email);
+        // alert(user_pwd);
+
+        var url = "user_login.do";
+        var param = "user_email=" + encodeURIComponent(user_email) + "&user_pwd=" + encodeURIComponent(user_pwd);
+        sendRequest(url, param, resultFn, "post");
+
+    } // end of login
+
+    function resultFn(){
+        if(xhr.readyState == 4 && xhr.status == 200){
+            var result = xhr.responseText;
+            var check;
+            if(result == '로그인 성공'){
+                check = 3;
+            } else if(result == '비밀번호 불일치'){
+                check = 4;
+            } else{
+                check = 5;
+            }
+
+            location.href = "login.do?check=" + check;
+        }
+    } // end of resultFn()
+</script>
 </body>
 
 </html>

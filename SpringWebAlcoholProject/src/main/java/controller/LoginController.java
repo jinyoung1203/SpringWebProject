@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import service.TotalService;
 import util.Common;
 import vo.UserVO;
@@ -45,8 +46,8 @@ public class LoginController {
     } // end of constructor
 
     @RequestMapping(value = "/login.do", method = {RequestMethod.GET, RequestMethod.POST})
-    public String login(Model model) {
-        session = request.getSession();
+    public String login(Model model, String check) {
+        // session = request.getSession();
 
         /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
         String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
@@ -61,6 +62,8 @@ public class LoginController {
         String kakaoAuthUrl = kakaoLoginBO.getAuthorizationUrl(session);
         System.out.println("카카오 : " + kakaoAuthUrl);
         model.addAttribute("kakaoUrl", kakaoAuthUrl);
+
+        model.addAttribute("check",check);
 
         return Common.Login.VIEW_PATH + "login.jsp";
     } // end of login()
@@ -84,23 +87,19 @@ public class LoginController {
         // 프로필 조회
         String email = (String) response_obj.get("email");
         String name = (String) response_obj.get("name");
+        String birthday = (String) response_obj.get("birthday");
+        String birthyear = (String) response_obj.get("birthyear");
+
+        String birthdate = birthyear + birthday.substring(0, 2) + birthday.substring(3,5);
 
         // 세션에 사용자 정보 등록
         model.addAttribute("signIn", apiResult);
-        model.addAttribute("naver_email", email);
-        model.addAttribute("naver_name", name);
+        model.addAttribute("email", email);
+        model.addAttribute("name", name);
+        model.addAttribute("birthdate", birthdate);
 
-        return "redirect:/naverLoginSuccess.do";
+        return "redirect:/naver_register_form.do";
     } // end of callback()
-
-    @RequestMapping("/naverLoginSuccess.do")
-    public String naverLoginSuccess(Model model, String apiResult, String email, String name) {
-        model.addAttribute("signIn", apiResult);
-        model.addAttribute("naver_email", email);
-        model.addAttribute("naver_name", name);
-
-        return Common.Login.VIEW_PATH + "callback.jsp";
-    } // end of naverLoginSuccess()
 
     @RequestMapping(value = "/kakaoCallback.do", method = {RequestMethod.GET, RequestMethod.POST})
     public String kakaoCallback(Model model, @RequestParam String code, @RequestParam String state) throws Exception {
@@ -121,24 +120,30 @@ public class LoginController {
         // 프로필 조회
         String email = (String) response_obj1.get("email");
         String name = (String) response_obj2.get("nickname");
+        System.out.println(email);
+        System.out.println(name);
 
         // 세션에 사용자 정보 등록
-        session.setAttribute("signIn", apiResult);
-        session.setAttribute("email", email);
-        session.setAttribute("name", name);
+        model.addAttribute("signIn", apiResult);
+        model.addAttribute("email", email);
+        model.addAttribute("name", name);
 
-        return "redirct:/kakaoSuccess.do";
+        return "redirct:/naver_register_form.do";
     } // end of kakaocallback()
 
-    @RequestMapping("/kakaoSuccess.do")
-    public String kakaoSuccess(HttpServletRequest request) {
+    @RequestMapping("/naver_register_form.do")
+    public String naver_register_form(Model model, String name, String email, String birthdate) {
+        // 네이버  로그인 정보 받아옴
+        model.addAttribute("name", name);
+        model.addAttribute("email", email);
+        model.addAttribute("birthdate", birthdate);
 
-        return Common.Login.VIEW_PATH + "kakaocallback.jsp";
-    } // end of kakaoSuccess()
-
+        return Common.Login.VIEW_PATH + "register_form.jsp";
+    } // end of register()
 
     @RequestMapping("/register_form.do")
-    public String register_form() {
+    public String register_form(Model model) {
+        // 네이버  로그인 정보 받아옴
 
         return Common.Login.VIEW_PATH + "register_form.jsp";
     } // end of register()
@@ -147,11 +152,12 @@ public class LoginController {
     public String register_detail_form(Model model, UserVO vo) {
         model.addAttribute("vo", vo);
         return Common.Login.VIEW_PATH + "register_detail.jsp";
-    } // end of register_detail()register_detail
+    } // end of register_detail()
 
     @RequestMapping("/register.do")
     public String register(Model model, UserVO vo) {
         int res = service.insert(vo);
+        System.out.println(res);
         int check = 0;
         // 회원가입 성공, 실패, 첫 로드 확인
         if (res == 1) {
@@ -163,11 +169,25 @@ public class LoginController {
         return Common.Login.VIEW_PATH + "login.jsp";
     } // end of register()
 
+    @RequestMapping(value = "/user_login.do", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String user_login(UserVO vo){
+        String user_email = vo.getUser_email();
+        String user_pwd = vo.getUser_pwd();
+        
+        String result = "";
+        UserVO vo1 = service.selectOne(user_email);
+        if(vo1 == null){
+            result = "로그인 실패";
+        } else if(!vo1.getUser_pwd().equals(user_pwd)){
+            result = "비밀번호 불일치";
+        } else{
+            result = "로그인 성공";
+        }
 
-    @RequestMapping("/test.do")
-    public String test() {
-        return Common.Login.VIEW_PATH + "test.jsp";
-    }
+        return result;
+    } // end of user_login()
+
 
 
 } // end of class

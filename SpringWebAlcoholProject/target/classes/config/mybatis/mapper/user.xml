@@ -17,6 +17,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 							   )
 	</insert>
 
+	<select id="user_selectOne" parameterType="java.lang.String" resultType="vo.UserVO">
+		select * from user1 where user_email = #{user_email}
+	</select>
 </mapper>
 
 

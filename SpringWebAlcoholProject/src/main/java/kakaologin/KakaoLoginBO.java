@@ -15,13 +15,15 @@ public class KakaoLoginBO {
     // 카카오 로그인 정보
     private final static String KAKAO_CLIENT_ID = "3951fe07922dbdbd33f02177d181a7ba";
     private final static String KAKAO_CLIENT_SECRET = "a2HkDXc8LoDCXMq2rg3foyLhmWKSP3Wv";
-    private final static String KAKAO_REDIRECT_URI = "http://192.168.3.3:9090/kakaoCallback.do";
-    private final static String SESSION_STATE = "kakao_oauth_state";
+    private final static String KAKAO_REDIRECT_URI = "http://localhost:9090/kakaoCallback.do";
+    private final static String SESSION_STATE = "oauth_state_kakao";
     private final static String PROFILE_API_URL = "https://kapi.kakao.com/v2/user/me";
 
     public String getAuthorizationUrl(HttpSession session) {
         String state = generateRandomString();
         setSession(session, state);
+        System.out.println("----- getAuthorizationUrl 메서드 -----");
+        System.out.println("state : " + state);
         OAuth20Service oAuth20Service = new ServiceBuilder()
                 .apiKey(KAKAO_CLIENT_ID)
                 .apiSecret(KAKAO_CLIENT_SECRET)
@@ -32,6 +34,9 @@ public class KakaoLoginBO {
 
     public OAuth2AccessToken getAccessToken(HttpSession session, String code, String state) throws Exception {
         String sessionState = getSession(session);
+        System.out.println("------ getAccessToken 메서드 ------");
+        System.out.println("sessionState : " + sessionState);
+        System.out.println("state : " + state);
         if (StringUtils.pathEquals(sessionState, state)) {
             OAuth20Service oAuth20Service = new ServiceBuilder()
                     .apiKey(KAKAO_CLIENT_ID)

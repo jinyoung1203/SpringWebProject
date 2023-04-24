@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -57,8 +58,16 @@
                                         <label for="user_email" class="form-label">ID(e-mail)</label>
                                         <div class="input-group has-validation">
                                             <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                            <input type="text" name="user_email" class="form-control" id="user_email"
-                                                   required>
+                                            <c:choose>
+                                                <c:when test="${email ne null}">
+                                                    <input type="text" name="user_email" class="form-control" id="user_email"
+                                                           value="${email}" readonly required>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <input type="text" name="user_email" class="form-control" id="user_email"
+                                                           required>
+                                                </c:otherwise>
+                                            </c:choose>
                                             <div class="valid-feedback">Good!</div>
                                             <div class="invalid-feedback"></div>
                                         </div>
@@ -81,16 +90,32 @@
 
                                     <div class="col-12">
                                         <label for="user_name" class="form-label">이름</label>
-                                        <input type="text" name="user_name" class="form-control" id="user_name"
-                                               required>
+                                        <c:choose>
+                                            <c:when test="${name ne null}">
+                                                <input type="text" name="user_name" class="form-control" id="user_name"
+                                                       value="${name}" readonly required>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <input type="text" name="user_name" class="form-control" id="user_name"
+                                                       required>
+                                            </c:otherwise>
+                                        </c:choose>
                                         <div class="valid-feedback">Good!</div>
                                         <div class="invalid-feedback"></div>
                                     </div>
 
                                     <div class="col-12">
                                         <label for="user_birthdate" class="form-label">생년월일</label>
-                                        <input type="text" name="user_birthdate" class="form-control"
-                                               id="user_birthdate" required>
+                                        <c:choose>
+                                            <c:when test="${birthdate ne null}">
+                                                <input type="text" name="user_birthdate" class="form-control"
+                                                       value="${birthdate}" id="user_birthdate" readonly required>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <input type="text" name="user_birthdate" class="form-control"
+                                                       id="user_birthdate" required>
+                                            </c:otherwise>
+                                        </c:choose>
                                         <div class="valid-feedback">Good!</div>
                                         <div class="invalid-feedback">8자리(ex. 19920324)</div>
                                     </div>

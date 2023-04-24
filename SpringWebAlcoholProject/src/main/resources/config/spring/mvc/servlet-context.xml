@@ -23,6 +23,7 @@
 	<context:component-scan base-package="dao, service, controller" />
 
 	<beans:bean id="naverLoginBO" class="naverlogin.NaverLoginBO" />
+	<beans:bean id="kakaoLoginBO" class="kakaologin.KakaoLoginBO" />
 
 	
 	

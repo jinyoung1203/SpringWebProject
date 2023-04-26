@@ -1,3 +1,5 @@
+let isIdCheck = false;
+
 let isEmailValid;
 function email_check(event) {
     isEmailValid = true;
@@ -107,19 +109,44 @@ function birthdate_check() {
 // user_birthdate validity
 document.querySelector("#user1_birthdate").addEventListener("input", birthdate_check);
 
+function accept(){
+    let checkAccept = document.getElementById("acceptTerms").checked;
+    if(checkAccept){
+        this.classList.add("is-valid");
+        this.classList.remove("is-invalid");
+    } else{
+        this.classList.remove("is-valid");
+        this.classList.add("is-invalid");
+    }
+} // end of accept()
+
+
+// accept validity 확인
+document.querySelector("#acceptTerms").addEventListener("input", accept);
+
 function send(f){
     const forms = document.querySelectorAll('.needs-validation');
 
     Array.from(forms).forEach(form => {
         form.addEventListener('submit', event => {
-            if (!form.checkValidity()) {
+            if (!form.checkValidity() ) {
                 event.preventDefault()
                 event.stopPropagation()
             }
 
+
+
             // form.classList.add()
         }, false)
     })
+
+    alert(isIdCheck);
+
+    if(!isIdCheck){
+        return;
+    }
+
+
 
     f.action = "register_detail_form.do";
     f.method = "post";
@@ -128,6 +155,35 @@ function send(f){
 } // end of send()
 
 
+function idRepetitionCheck(){
+    let user1_email = document.getElementById("user1_email").value;
+    // alert(user1_email);
+
+    var url = "idRepetitionCheck.do";
+    var param = "user1_email=" + encodeURIComponent(user1_email);
+
+    sendRequest(url, param, resultFn, "get");
+} // end of idCheck()
+
+function resultFn(){
+    if(xhr.readyState == 4 && xhr.status == 200){
+        // alert(xhr.readyState);
+        // alert(xhr.status);
+        // alert(xhr.responseText);
+        var result = xhr.responseText;
+
+        if(result == '가능'){
+            isIdCheck = true;
+            document.getElementById("idCheckSpan").innerHTML = "중복된 아이디가 없습니다."
+        } else{
+            document.getElementById("idCheckSpan").innerHTML = "이미 가입된 아이디가 있습니다."
+        }
+    }
+} // end of resultFn()
+
+function idChange(){
+    isIdCheck = false;
+} // end of idChange()
 
 
 

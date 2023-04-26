@@ -30,46 +30,71 @@
 </head>
 
 <body>
-<c:if test="${check eq 1}">
+<c:if test="${check ne null}">
     <button type="button" id="modalBtn" class="btn btn-primary visually-hidden" data-bs-toggle="modal"
             data-bs-target="#basicModal">
     </button>
-    <div class="modal" id="basicModal" tabindex="-1">
+    <div class="modal" id="basicModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">회원가입정보</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    회원가입에 성공했습니다. 로그인 해주세요.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Basic Modal-->
-</c:if>
-
-<c:if test="${check eq 2}">
-    <button type="button" id="modalBtn" class="btn btn-primary visually-hidden" data-bs-toggle="modal"
-            data-bs-target="#basicModal">
-    </button>
-    <div class="modal" id="basicModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">회원가입정보</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    회원가입에 실패했습니다. 다시 회원가입을 진행해주세요.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
+                <c:choose>
+                    <c:when test="${check eq 1}">
+                        <div class="modal-body">
+                            회원가입에 성공했습니다. 로그인 해주세요.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </c:when>
+                    <c:when test="${check eq 2}">
+                        <div class="modal-body">
+                            회원가입에 실패했습니다. 다시 회원가입을 진행해주세요.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </c:when>
+                    <c:when test="${check eq 3}">
+                        <div class="modal-body">
+                            로그인 성공!<br>
+                            <input type="hidden" value="${user_email}" id="modal_email"/><br>
+                            <input type="hidden" value="${user_pwd}"/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" onclick="loginSuccess();" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Close
+                            </button>
+                        </div>
+                    </c:when>
+                    <c:when test="${check eq 4}">
+                        <div class="modal-body">
+                            아이디 불일치!
+                            <input type="hidden" value="${user_email}" id="modal_email4"/>
+                            <input type="hidden" value="${user_pwd}" id="modal_pwd4"/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" onclick="mismatch('${user_email}', '${user_pwd}');"
+                                    class="btn btn-secondary" data-bs-dismiss="modal">Close
+                            </button>
+                        </div>
+                    </c:when>
+                    <c:when test="${check eq 5}">
+                        <div class="modal-body">
+                            비밀번호 불일치!
+                            <input type="hidden" value="${user_email}"/>
+                            <input type="hidden" value="${user_pwd}"/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" onclick="mismatch('${user_email}', '${user_pwd}');"
+                                    class="btn btn-secondary" data-bs-dismiss="modal">Close
+                            </button>
+                        </div>
+                    </c:when>
+                </c:choose>
             </div>
         </div>
     </div>
@@ -100,7 +125,7 @@
                                     <p class="text-center small">Enter your ID & password to login</p>
                                 </div>
 
-                                <form class="row g-3 needs-validation" novalidate>
+                                <form class="row g-3 needs-validation" onsubmit="return false;" novalidate>
                                     <div class="col-12" id="naver_id_login">
                                         <button type="button" class="btn btn-success w-100"
                                                 onclick="location.href='naverUrl.do'">Naver로 시작하기
@@ -121,16 +146,33 @@
                                         <label for="user_email" class="form-label">ID</label>
                                         <div class="input-group has-validation">
                                             <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                            <input type="text" name="user_email" class="form-control" id="user_email"
-                                                   required>
+                                            <c:choose>
+                                                <c:when test="${modal_email ne null}">
+                                                    <input type="text" name="user_email" class="form-control" id="user_email"
+                                                           value="${modal_email}" required>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <input type="text" name="user_email" class="form-control" id="user_email"
+                                                           required>
+                                                </c:otherwise>
+                                            </c:choose>
                                             <div class="invalid-feedback">Please enter your ID.</div>
                                         </div>
                                     </div>
 
                                     <div class="col-12">
                                         <label for="user_pwd" class="form-label">Password</label>
-                                        <input type="password" name="user_pwd" class="form-control" id="user_pwd"
-                                               required>
+                                        <c:choose>
+                                            <c:when test="${modal_pwd ne null}">
+                                                <input type="password" name="user_pwd" class="form-control" id="user_pwd"
+                                                       value="${modal_pwd}" required>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <input type="password" name="user_pwd" class="form-control" id="user_pwd"
+                                                       required>
+                                            </c:otherwise>
+                                        </c:choose>
+
                                         <div class="invalid-feedback">Please enter your password!</div>
                                     </div>
 
@@ -142,7 +184,8 @@
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <input class="btn btn-dark w-100" type="button" onclick="user_login(this.form);" value="Login" />
+                                        <input class="btn btn-dark w-100" id="login" type="button"
+                                               onclick="user_login(this.form);" value="Login"/>
                                     </div>
                                     <div class="col-12">
                                         <p class="small mb-0">Don't have account? <a href="register_form.do">Create an
@@ -169,18 +212,19 @@
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
         class="bi bi-arrow-up-short"></i></a>
 
+<script src="${pageContext.request.contextPath}/resources/assets/js/httpRequest.js"></script>
+
 <!-- Vendor JS Files -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
 <%--<script src="${pageContext.request.contextPath}/resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>--%>
-<%--<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>--%>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/register/login.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js"
         charset="utf-8"></script>
-<script src="${pageContext.request.contextPath}/resources/assets/js/httpRequest.js"></script>
 <script>
-    function user_login(f){
+    function user_login(f) {
         alert("login() 실행됨");
         let user_email = f.user_email.value.trim();
         let user_pwd = f.user_pwd.value.trim();
@@ -193,24 +237,28 @@
 
     } // end of login
 
-    function resultFn(){
+    function resultFn() {
         // alert(xhr.readyState);
         // alert(xhr.status);
-        if(xhr.readyState == 4 && xhr.status == 200){
-            alert(xhr.responseText);
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            // alert(xhr.responseText);
             var result = xhr.responseText;
             var check;
-            if(result == '로그인 성공'){
+            if (result == '로그인 성공') {
                 check = 3;
-            } else if(result == '아이디 불일치'){
+            } else if (result == '아이디 불일치') {
                 check = 4;
-            } else if(result == '비밀번호 불일치'){
+            } else if (result == '비밀번호 불일치') {
                 check = 5;
             } else {
                 check = 4;
             }
 
-            location.href = "login.do?check=" + check;
+            let user_email = document.getElementById("user_email").value;
+            let user_pwd = document.getElementById("user_pwd").value;
+
+            location.href = "login.do?check=" + check + "&user_email=" + encodeURIComponent(user_email)
+                + "&user_pwd=" + encodeURIComponent(user_pwd);
         }
     } // end of resultFn()
 </script>

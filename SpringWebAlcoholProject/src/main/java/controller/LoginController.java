@@ -46,15 +46,25 @@ public class LoginController {
     } // end of constructor
 
     @RequestMapping(value = "/login.do", method = {RequestMethod.GET, RequestMethod.POST})
-    public String login(Model model, String check) {
+    public String login(Model model, String check, String user_email, String user_pwd) {
+        if(session.getAttribute("user1") != null){
+            model.addAttribute("isUser1", "loginState");
+            System.out.println("----- 세션 정보 저장됨 -----");
+            return Common.Main.VIEW_PATH + "main.jsp";
+        }
 
-        model.addAttribute("check",check);
+        model.addAttribute("check", check);
+        model.addAttribute("user_email", user_email);
+        model.addAttribute("user_pwd", user_pwd);
+        System.out.println("----- login.do -----");
+        System.out.println(user_email);
+        System.out.println(user_pwd);
 
         return Common.Login.VIEW_PATH + "login.jsp";
     } // end of login()
 
     @RequestMapping(value = "/naverUrl.do", method = {RequestMethod.GET, RequestMethod.POST})
-    public String naverUrl(){
+    public String naverUrl() {
         /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
         String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
 
@@ -64,7 +74,7 @@ public class LoginController {
     } // end of naverUrl()
 
     @RequestMapping(value = "/kakaoUrl.do", method = {RequestMethod.GET, RequestMethod.POST})
-    public String kakaoUrl(){
+    public String kakaoUrl() {
         /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
         String kakaoAuthUrl = kakaoLoginBO.getAuthorizationUrl(session);
 
@@ -96,7 +106,18 @@ public class LoginController {
         String birthday = (String) response_obj.get("birthday");
         String birthyear = (String) response_obj.get("birthyear");
 
-        String birthdate = birthyear + birthday.substring(0, 2) + birthday.substring(3,5);
+        String birthdate = birthyear + birthday.substring(0, 2) + birthday.substring(3, 5);
+
+        UserVO vo = service.selectOne(email);
+        System.out.println("----- navercallback.do ----- ");
+        System.out.println("vo : " + vo);
+        System.out.println("email : " + email);
+
+        if(vo != null){
+            System.out.println("----- navercallback.do, vo null 아님 if문 실행 -----");
+
+            return "loginSuccess.do?user1_email=" + email;
+        }
 
         // 세션에 사용자 정보 등록
         model.addAttribute("signIn", apiResult);
@@ -178,7 +199,7 @@ public class LoginController {
 
     @RequestMapping(value = "/user_login.do", method = {RequestMethod.POST, RequestMethod.GET}, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public String user_login(UserVO vo){
+    public String user_login(UserVO vo) {
         System.out.println("------ user_login.do, vo 확인 ------");
         System.out.println("vo객체 : " + vo);
         System.out.println("vo.getUser1_email : " + vo.getUser1_email());
@@ -187,7 +208,7 @@ public class LoginController {
         String user_email = vo.getUser1_email();
         String user_pwd = vo.getUser1_pwd();
 
-        
+
         String result = "";
         UserVO vo1 = service.selectOne(user_email);
         System.out.println("------ user_login.do, vo1 확인 ------");
@@ -195,16 +216,16 @@ public class LoginController {
         // System.out.println("vo1 이름 : " + vo1.getUser1_email());
         // System.out.println("vo1 비번 : " + vo1.getUser1_pwd());
 
-        if(vo1 != null) {
-            if(!user_email.equals(vo1.getUser1_email())) {
+        if (vo1 != null) {
+            if (!user_email.equals(vo1.getUser1_email())) {
                 System.out.println("----- if문 1 -----");
                 result = "아이디 불일치";
                 System.out.println("result : " + result);
-            } else if(!user_pwd.equals(vo1.getUser1_pwd())){
+            } else if (!user_pwd.equals(vo1.getUser1_pwd())) {
                 System.out.println("----- if문 2 -----");
                 result = "비밀번호 불일치";
                 System.out.println("result : " + result);
-            } else if(user_email.equals(vo1.getUser1_name()) && user_pwd.equals(vo1.getUser1_pwd())){
+            } else {
                 System.out.println("----- if문 3 -----");
                 result = "로그인 성공";
                 System.out.println("result : " + result);
@@ -219,10 +240,66 @@ public class LoginController {
     } // end of user_login()
 
     @RequestMapping("login_result.do")
-    public String login_result(String check){
+    public String login_result(String check) {
         System.out.println("login_result() : " + check);
         return "redirect:/login.do?check=" + check;
     } // end of login_result()
 
+    @RequestMapping("idMismatch.do")
+    public String idMismatch(Model model, String user_email, String user_pwd) {
+        System.out.println("----- idMismatch -----");
+        System.out.println(user_email);
+        System.out.println(user_pwd);
 
+        model.addAttribute("user_email", user_email);
+        model.addAttribute("user_pwd", user_pwd);
+
+        return Common.Login.VIEW_PATH + "login.jsp";
+    } // end of idMismatch()
+
+    @RequestMapping("loginSuccess.do")
+    public String loginSuccess(String user1_email){
+        System.out.println("----- loginSuccess.do 실행 -----");
+        System.out.println("user1_email : " + user1_email);
+        UserVO vo = service.selectOne(user1_email);
+        System.out.println("vo : " + vo);
+        session.setAttribute("user1", vo);
+
+        return Common.Main.VIEW_PATH + "main.jsp";
+    } // end of loginSuccess()
+
+    @RequestMapping("logout.do")
+    public String logout(){
+        session.removeAttribute("user1");
+        return "redirect:/login.do";
+    } // end of logout()
+
+    @RequestMapping(value = "loginMismatch.do", method = {RequestMethod.POST, RequestMethod.GET})
+    public String loginMismatch(Model model, String modal_email, String modal_pwd){
+        System.out.println("----- loginMismatch.do -----");
+        System.out.println("modal_email : " + modal_email);
+        System.out.println("modal_pwd : " + modal_pwd);
+        model.addAttribute("modal_email", modal_email);
+        model.addAttribute("modal_pwd", modal_pwd);
+        return Common.Login.VIEW_PATH + "login.jsp";
+    } // end of loginMismatch()
+
+    @RequestMapping(value = "idRepetitionCheck.do", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String idRepetitionCheck(String user1_email){
+        UserVO vo = service.selectOne(user1_email);
+        System.out.println("----- idRepetition.do -----");
+        System.out.println("vo : " + vo);
+        System.out.println("user1_email : " + user1_email);
+
+        String result = "";
+        if(vo == null){
+            result = "가능";
+        } else{
+            result = "불가능";
+        }
+
+        System.out.println("result : " + result);
+        return result;
+    } // end of idRepetitionCheck()
 } // end of class

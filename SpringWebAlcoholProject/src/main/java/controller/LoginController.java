@@ -47,27 +47,33 @@ public class LoginController {
 
     @RequestMapping(value = "/login.do", method = {RequestMethod.GET, RequestMethod.POST})
     public String login(Model model, String check) {
-        // session = request.getSession();
-
-        /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
-        String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-
-        //https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
-        //redirect_uri=192.168.3.3%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
-        System.out.println("네이버 : " + naverAuthUrl);
-
-        // 네이버
-        model.addAttribute("naverUrl", naverAuthUrl);
-        // 카카오 URL
-        String kakaoAuthUrl = kakaoLoginBO.getAuthorizationUrl(session);
-        System.out.println("카카오 : " + kakaoAuthUrl);
-        model.addAttribute("kakaoUrl", kakaoAuthUrl);
 
         model.addAttribute("check",check);
 
         return Common.Login.VIEW_PATH + "login.jsp";
     } // end of login()
 
+    @RequestMapping(value = "/naverUrl.do", method = {RequestMethod.GET, RequestMethod.POST})
+    public String naverUrl(){
+        /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
+        String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+
+        System.out.println("네이버 : " + naverAuthUrl);
+
+        return "redirect:" + naverAuthUrl;
+    } // end of naverUrl()
+
+    @RequestMapping(value = "/kakaoUrl.do", method = {RequestMethod.GET, RequestMethod.POST})
+    public String kakaoUrl(){
+        /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
+        String kakaoAuthUrl = kakaoLoginBO.getAuthorizationUrl(session);
+
+        System.out.println("카카오 : " + kakaoAuthUrl);
+
+        return "redirect:" + kakaoAuthUrl;
+    } // end of kakaoUrl()
+
+    // 네이버 callback
     @RequestMapping(value = "/callback.do", method = {RequestMethod.GET, RequestMethod.POST})
     public String naverCallback(Model model, @RequestParam String code, @RequestParam String state) throws Exception {
         System.out.println("naver callBack 실행됨");
@@ -101,6 +107,7 @@ public class LoginController {
         return "redirect:/naver_register_form.do";
     } // end of callback()
 
+    // 카카오 callback
     @RequestMapping(value = "/kakaoCallback.do", method = {RequestMethod.GET, RequestMethod.POST})
     public String kakaoCallback(Model model, @RequestParam String code, @RequestParam String state) throws Exception {
         System.out.println("kakao callback 실행 됨");
@@ -169,25 +176,53 @@ public class LoginController {
         return Common.Login.VIEW_PATH + "login.jsp";
     } // end of register()
 
-    @RequestMapping(value = "/user_login.do", produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/user_login.do", method = {RequestMethod.POST, RequestMethod.GET}, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String user_login(UserVO vo){
-        String user_email = vo.getUser_email();
-        String user_pwd = vo.getUser_pwd();
+        System.out.println("------ user_login.do, vo 확인 ------");
+        System.out.println("vo객체 : " + vo);
+        System.out.println("vo.getUser1_email : " + vo.getUser1_email());
+        System.out.println("vo.getUser1_pwd : " + vo.getUser1_pwd());
+
+        String user_email = vo.getUser1_email();
+        String user_pwd = vo.getUser1_pwd();
+
         
         String result = "";
         UserVO vo1 = service.selectOne(user_email);
-        if(vo1 == null){
-            result = "로그인 실패";
-        } else if(!vo1.getUser_pwd().equals(user_pwd)){
-            result = "비밀번호 불일치";
-        } else{
-            result = "로그인 성공";
+        System.out.println("------ user_login.do, vo1 확인 ------");
+        System.out.println("vo1 객체 : " + vo1);
+        // System.out.println("vo1 이름 : " + vo1.getUser1_email());
+        // System.out.println("vo1 비번 : " + vo1.getUser1_pwd());
+
+        if(vo1 != null) {
+            if(!user_email.equals(vo1.getUser1_email())) {
+                System.out.println("----- if문 1 -----");
+                result = "아이디 불일치";
+                System.out.println("result : " + result);
+            } else if(!user_pwd.equals(vo1.getUser1_pwd())){
+                System.out.println("----- if문 2 -----");
+                result = "비밀번호 불일치";
+                System.out.println("result : " + result);
+            } else if(user_email.equals(vo1.getUser1_name()) && user_pwd.equals(vo1.getUser1_pwd())){
+                System.out.println("----- if문 3 -----");
+                result = "로그인 성공";
+                System.out.println("result : " + result);
+            }
+        } else {
+            System.out.println("----- if문 4 -----");
+            result = "아이디 불일치";
+            System.out.println("result : " + result);
         }
 
         return result;
     } // end of user_login()
 
+    @RequestMapping("login_result.do")
+    public String login_result(String check){
+        System.out.println("login_result() : " + check);
+        return "redirect:/login.do?check=" + check;
+    } // end of login_result()
 
 
 } // end of class

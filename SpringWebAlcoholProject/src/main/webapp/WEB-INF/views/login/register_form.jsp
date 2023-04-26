@@ -55,16 +55,16 @@
 
                                 <form class="row g-3 needs-validation" id="register_form" novalidate>
                                     <div class="col-12">
-                                        <label for="user_email" class="form-label">ID(e-mail)</label>
+                                        <label for="user1_email" class="form-label">ID(e-mail)</label>
                                         <div class="input-group has-validation">
                                             <span class="input-group-text" id="inputGroupPrepend">@</span>
                                             <c:choose>
                                                 <c:when test="${email ne null}">
-                                                    <input type="text" name="user_email" class="form-control" id="user_email"
+                                                    <input type="text" name="user1_email" class="form-control" id="user1_email"
                                                            value="${email}" readonly required>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <input type="text" name="user_email" class="form-control" id="user_email"
+                                                    <input type="text" name="user1_email" class="form-control" id="user1_email"
                                                            required>
                                                 </c:otherwise>
                                             </c:choose>
@@ -74,8 +74,8 @@
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="user_pwd" class="form-label">비밀번호</label>
-                                        <input type="password" name="user_pwd" class="form-control" id="user_pwd"
+                                        <label for="user1_pwd" class="form-label">비밀번호</label>
+                                        <input type="password" name="user1_pwd" class="form-control" id="user1_pwd"
                                                required>
                                         <div class="valid-feedback">Good!</div>
                                         <div class="invalid-feedback">6 ~ 16자리의 영문, 숫자, 특문 조합</div>
@@ -89,14 +89,14 @@
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="user_name" class="form-label">이름</label>
+                                        <label for="user1_name" class="form-label">이름</label>
                                         <c:choose>
                                             <c:when test="${name ne null}">
-                                                <input type="text" name="user_name" class="form-control" id="user_name"
+                                                <input type="text" name="user1_name" class="form-control" id="user1_name"
                                                        value="${name}" readonly required>
                                             </c:when>
                                             <c:otherwise>
-                                                <input type="text" name="user_name" class="form-control" id="user_name"
+                                                <input type="text" name="user1_name" class="form-control" id="user1_name"
                                                        required>
                                             </c:otherwise>
                                         </c:choose>
@@ -105,15 +105,15 @@
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="user_birthdate" class="form-label">생년월일</label>
+                                        <label for="user1_birthdate" class="form-label">생년월일</label>
                                         <c:choose>
                                             <c:when test="${birthdate ne null}">
-                                                <input type="text" name="user_birthdate" class="form-control"
-                                                       value="${birthdate}" id="user_birthdate" readonly required>
+                                                <input type="text" name="user1_birthdate" class="form-control"
+                                                       value="${birthdate}" id="user1_birthdate" readonly required>
                                             </c:when>
                                             <c:otherwise>
-                                                <input type="text" name="user_birthdate" class="form-control"
-                                                       id="user_birthdate" required>
+                                                <input type="text" name="user1_birthdate" class="form-control"
+                                                       id="user1_birthdate" required>
                                             </c:otherwise>
                                         </c:choose>
                                         <div class="valid-feedback">Good!</div>

@@ -25,7 +25,10 @@ public class UserDAO {
 	} // end of insert()
 
 	public UserVO selectOne(String user_email){
+		System.out.println("------ dao selectOne() ------");
+		System.out.println("user_email : " + user_email);
 		UserVO vo = sqlSession.selectOne("u.user_selectOne", user_email);
+		System.out.println("vo 객체 : " + vo);
 		return vo;
 	} // end of selectOne()
 

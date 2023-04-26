@@ -6,19 +6,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="user_insert" parameterType="vo.UserVO" >
 		insert into USER1 values(
 		                        seq_user_idx.nextVal,
-		                        #{user_name},
-		                        #{user_pwd},
-		                        #{user_phonenumber},
-		                        #{user_email},
-		                        #{user_birthdate},
-		                        #{user_addr},
+		                        #{user1_name},
+		                        #{user1_pwd},
+		                        #{user1_phonenumber},
+		                        #{user1_email},
+		                        #{user1_birthdate},
+		                        #{user1_addr},
 		                        sysdate,
-		                        #{user_nickname}
+		                        #{user1_nickname}
 							   )
 	</insert>
 
 	<select id="user_selectOne" parameterType="java.lang.String" resultType="vo.UserVO">
-		select * from user1 where user_email = #{user_email}
+		select * from user1 where user1_email = #{user_email}
 	</select>
 </mapper>
 

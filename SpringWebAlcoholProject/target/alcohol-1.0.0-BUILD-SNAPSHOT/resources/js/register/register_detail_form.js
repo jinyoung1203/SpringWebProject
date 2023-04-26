@@ -16,7 +16,7 @@ function nickname_check() {
 } // end of nickname_check()
 
 // nickname validity
-document.querySelector("#user_nickname").addEventListener("input", nickname_check);
+document.querySelector("#user1_nickname").addEventListener("input", nickname_check);
 
 function phonenumber_check() {
     let isPhoneNumberValid = true;
@@ -36,7 +36,7 @@ function phonenumber_check() {
 } // end of phonenumber_check()
 
 // phonenumber validity
-document.querySelector("#user_phonenumber").addEventListener("input", phonenumber_check);
+document.querySelector("#user1_phonenumber").addEventListener("input", phonenumber_check);
 
 // 주소창 테마
 var themeObj = {
@@ -107,8 +107,8 @@ function sample4_execDaumPostcode() {
 } // end of sample4_execDaumPostcode()
 
 function send(f){
-    let user_addr = f.sample4_roadAddress.value + " (" + f.sample4_postcode.value + ") " + f.sample4_detailAddress.value;
-    $("input[name=user_addr]").attr('value', user_addr);
+    let user1_addr = f.sample4_roadAddress.value + " (" + f.sample4_postcode.value + ") " + f.sample4_detailAddress.value;
+    $("input[name=user1_addr]").attr('value', user1_addr);
 
 
     const forms = document.querySelectorAll('.needs-validation');

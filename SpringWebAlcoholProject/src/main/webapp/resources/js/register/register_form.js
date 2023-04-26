@@ -18,7 +18,7 @@ function email_check(event) {
 } // end of email_check()
 
 // email(ID) validity
-document.querySelector("#user_email").addEventListener("input", email_check);
+document.querySelector("#user1_email").addEventListener("input", email_check);
 
 let isPwdValid;
 function pwd_check() {
@@ -40,13 +40,13 @@ function pwd_check() {
 } // end of pwd_check()
 
 // pwd validity
-document.querySelector("#user_pwd").addEventListener("input", pwd_check);
+document.querySelector("#user1_pwd").addEventListener("input", pwd_check);
 
 let isPwdCheckValid;
 function pwd_check_check() {
     isPwdCheckValid = true;
     let input_user_pwd_check = this.value;
-    let input_user_pwd = document.getElementById("user_pwd").value;
+    let input_user_pwd = document.getElementById("user1_pwd").value;
 
     if (input_user_pwd_check != input_user_pwd) {
         isPwdCheckValid = false;
@@ -84,7 +84,7 @@ function name_check() {
 } // end of name_check()
 
 // user_name validity
-document.querySelector("#user_name").addEventListener("input", name_check);
+document.querySelector("#user1_name").addEventListener("input", name_check);
 
 let isBirthDate;
 function birthdate_check() {
@@ -105,7 +105,7 @@ function birthdate_check() {
 } // end of birthdate_check()
 
 // user_birthdate validity
-document.querySelector("#user_birthdate").addEventListener("input", birthdate_check);
+document.querySelector("#user1_birthdate").addEventListener("input", birthdate_check);
 
 function send(f){
     const forms = document.querySelectorAll('.needs-validation');

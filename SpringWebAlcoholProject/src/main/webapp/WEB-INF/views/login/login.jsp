@@ -26,7 +26,7 @@
     <!-- Template Main CSS File -->
     <link href="${pageContext.request.contextPath}/resources/assets/css/style.css" rel="stylesheet">
 
-    <script src="${pageContext.request.contextPath}/resources/js/httpRequest.js"></script>
+
 </head>
 
 <body>
@@ -103,13 +103,13 @@
                                 <form class="row g-3 needs-validation" novalidate>
                                     <div class="col-12" id="naver_id_login">
                                         <button type="button" class="btn btn-success w-100"
-                                                onclick="location.href='${naverUrl}'">Naver로 시작하기
+                                                onclick="location.href='naverUrl.do'">Naver로 시작하기
                                         </button>
                                     </div>
 
                                     <div class="col-12">
                                         <button type="button" class="btn btn-warning w-100"
-                                                onclick="location.href='${kakaoUrl}'">Kakao로 시작하기
+                                                onclick="location.href='kakaoUrl.do'">Kakao로 시작하기
                                         </button>
                                     </div>
 
@@ -175,33 +175,39 @@
         crossorigin="anonymous"></script>
 <%--<script src="${pageContext.request.contextPath}/resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>--%>
 <%--<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>--%>
-<%--<script src="${pageContext.request.contextPath}/resources/js/register/login.js"></script>--%>
+<script src="${pageContext.request.contextPath}/resources/js/register/login.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js"
         charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/resources/assets/js/httpRequest.js"></script>
 <script>
     function user_login(f){
-        // alert("login() 실행됨");
+        alert("login() 실행됨");
         let user_email = f.user_email.value.trim();
         let user_pwd = f.user_pwd.value.trim();
         // alert(user_email);
         // alert(user_pwd);
 
         var url = "user_login.do";
-        var param = "user_email=" + encodeURIComponent(user_email) + "&user_pwd=" + encodeURIComponent(user_pwd);
+        var param = "user1_email=" + encodeURIComponent(user_email) + "&user1_pwd=" + encodeURIComponent(user_pwd);
         sendRequest(url, param, resultFn, "post");
 
     } // end of login
 
     function resultFn(){
+        // alert(xhr.readyState);
+        // alert(xhr.status);
         if(xhr.readyState == 4 && xhr.status == 200){
+            alert(xhr.responseText);
             var result = xhr.responseText;
             var check;
             if(result == '로그인 성공'){
                 check = 3;
-            } else if(result == '비밀번호 불일치'){
+            } else if(result == '아이디 불일치'){
                 check = 4;
-            } else{
+            } else if(result == '비밀번호 불일치'){
                 check = 5;
+            } else {
+                check = 4;
             }
 
             location.href = "login.do?check=" + check;

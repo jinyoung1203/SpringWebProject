@@ -55,17 +55,17 @@
 
                                 <form class="row g-3 needs-validation" id="register_form" novalidate>
                                     <div class="col-12">
-                                        <label for="user_nickname" class="form-label">닉네임</label>
-                                        <input type="text" name="user_nickname" class="form-control" id="user_nickname"
+                                        <label for="user1_nickname" class="form-label">닉네임</label>
+                                        <input type="text" name="user1_nickname" class="form-control" id="user1_nickname"
                                                required>
                                         <div class="valid-feedback">Good!</div>
                                         <div class="invalid-feedback"></div>
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="user_phonenumber" class="form-label">전화번호</label>
-                                        <input type="text" name="user_phonenumber" class="form-control"
-                                               id="user_phonenumber"
+                                        <label for="user1_phonenumber" class="form-label">전화번호</label>
+                                        <input type="text" name="user1_phonenumber" class="form-control"
+                                               id="user1_phonenumber"
                                                required>
                                         <div class="valid-feedback">Good!</div>
                                         <div class="invalid-feedback">ex)010-9962-1671</div>
@@ -104,11 +104,11 @@
                                         <p class="small mb-0">Already have an account? <a href="login.do">Log in</a></p>
                                     </div>
                                     <div>
-                                        <input type="hidden" name="user_name" value="${vo.user_name}" />
-                                        <input type="hidden" name="user_pwd" value="${vo.user_pwd}" />
-                                        <input type="hidden" name="user_email" value="${vo.user_email}" />
-                                        <input type="hidden" name="user_birthdate" value="${vo.user_birthdate}" />
-                                        <input type="hidden" name="user_addr" value="">
+                                        <input type="hidden" name="user1_name" value="${vo.user1_name}" />
+                                        <input type="hidden" name="user1_pwd" value="${vo.user1_pwd}" />
+                                        <input type="hidden" name="user1_email" value="${vo.user1_email}" />
+                                        <input type="hidden" name="user1_birthdate" value="${vo.user1_birthdate}" />
+                                        <input type="hidden" name="user1_addr" value="">
                                     </div>
                                 </form>
 

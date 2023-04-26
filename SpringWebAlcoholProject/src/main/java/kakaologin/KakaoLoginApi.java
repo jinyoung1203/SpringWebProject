@@ -6,11 +6,11 @@ public class KakaoLoginApi extends DefaultApi20 {
     protected KakaoLoginApi() {} // end of constructor
 
     private static class InstanceHolder {
-        private static final KakaoLoginApi INSTANCE = new KakaoLoginApi();
+        private static final KakaoLoginApi INSTANCE2 = new KakaoLoginApi();
     }
 
     public static KakaoLoginApi getInstance(){
-        return InstanceHolder.INSTANCE;
+        return InstanceHolder.INSTANCE2;
     } // end of getInstance()
 
     @Override

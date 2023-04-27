@@ -22,6 +22,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 </mapper>
 
+<mapper namespace="p">
+	<select id="select_list" resultType="vo.ProductListTestVO">
+		select * from product;
+	</select>
+</mapper>
+
 
 
 

@@ -12,5 +12,8 @@ public class Common {
 	public static class Login{
 		public static final String VIEW_PATH = "/WEB-INF/views/login/";
 	} // end of Login class
-	
+
+	public static class Product{
+		public static final String VIEW_PATH = "/WEB-INF/views/product/";
+	}
 } // end of class

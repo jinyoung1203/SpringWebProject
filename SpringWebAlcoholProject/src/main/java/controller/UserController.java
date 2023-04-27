@@ -33,8 +33,13 @@ public class UserController {
 		this.service = service;
 		System.out.println("Controller 생성자 : " + service);
 	} // end of constructor
+	
+	@RequestMapping("/")
+	public String mainofmain(){
+		return Common.Main.VIEW_PATH+"main_of_main.jsp";
+	}
 
-	@RequestMapping(value = { "/", "/user_list.do" })
+	@RequestMapping( "/user_list.do" )
 	public String selectList(Model model) {
 		List<UserVO> user_list = service.selectList();
 		model.addAttribute("user_list", user_list);

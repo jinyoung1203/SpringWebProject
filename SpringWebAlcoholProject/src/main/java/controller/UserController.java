@@ -34,14 +34,4 @@ public class UserController {
 		System.out.println("Controller 생성자 : " + service);
 	} // end of constructor
 
-	@RequestMapping("/user_list.do")
-	public String selectList(Model model) {
-		List<UserVO> user_list = service.selectList();
-		model.addAttribute("user_list", user_list);
-
-		return Common.User.VIEW_PATH + "user_list.jsp";
-	} // end of selectList()
-
-
-
 } // end of class

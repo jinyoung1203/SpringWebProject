@@ -1,0 +1,148 @@
+1. BOARD table
+-- BOARD 시퀀스 생성
+CREATE SEQUENCE seq_board_idx;
+
+-- BOARD table 생성
+CREATE TABLE "Board" (
+  "board_idx" number(6) primary key,
+  "board_content" CLOB,
+  "board_subject" varchar2(50),
+  "board_regdate" date,
+  "board_readhit" number(5),
+  "board_ref" number(3),
+  "board_step" number(3),
+  "board_depth" number(3),
+  "user_idx" number(6)
+);
+
+2. USER
+-- USER 시퀀스 생성
+CREATE sequence seq_user_idx;
+
+-- USER table 생성
+CREATE TABLE "USER1" (
+  "user_idx" number(6) primary key,
+  "user_name" varchar2(50),
+  "user_pwd" varchar2(30),
+  "user_phonenumber" varchar2(30),
+  "user_email" varchar2(50),
+  "user_birthdate" date,
+  "user_addr" varchar2(100),
+  "user_regidate" date,
+  "user_nickname" varchar2(50)
+);
+
+3. Shopping_Basket
+-- Shopping_Basket 시퀀스 생성
+CREATE sequence seq_basket_idx;
+
+-- Shopping_Basket table 생성
+CREATE TABLE "Shopping_Basket" (
+  "basket_idx" number(6) primary key,
+  "product_idx" varchar2(50),
+  "product_amount" number(4),
+  "user_idx" number(3)
+);
+
+4. order_list
+-- order_list 시퀀스 생성
+CREATE sequence seq_orderlist_idx;
+
+-- order_list table 생성
+CREATE TABLE "order_list" (
+  "orderlist_idx" number(6) primary key,
+  "orderlist_addr" varchar2(50),
+  "orderlist_status" number(3),
+  "orderlist_date" date,
+  "product_idx" number(6),
+  "product_amount" number(4),
+  "product_price" number(15),
+  "user_idx" number(6)
+);
+
+5. Event  
+-- Event 시퀀스 생성
+create SEQUENCE seq_event_idx;
+
+-- Event table 생성
+CREATE TABLE "Event" (
+  "event_idx" number(10),
+  "event_name" varchar2(50),
+  "event_content" clob,
+  "event_filename" varchar2(50),
+  "event_filename2" varchar2(50),
+  "event_regidate" varchar2(20),
+  "event_thumbnail_filename" varchar2(50),
+  PRIMARY KEY ("event_idx")
+);
+
+6. Producer
+-- producer 시퀀스 생성
+create sequence seq_producer_idx;
+
+-- producer table 생성
+create table producer (
+	producer_idx number(10) primary key,
+	producer_name,
+	producer_addr,
+	subscription_price
+)
+
+7. Hashtag_list
+-- Hashtag_list table 생성
+create table Hashtag_list (
+	hashtag VARCHAR2(50),
+	product_idx number(10)
+)
+
+8. review
+-- review 시퀀스 생성
+create sequence seq_review_idx;
+
+-- review table 생성
+create table review(
+	review_idx number(10) primary key,
+	review_content CLOB,
+	review_rating number(10),
+	review_filename VARCHAR2(50),
+	user_idx number(10),
+	product_idx number(10)
+)
+
+9. Subscription
+-- Subscription table 생성
+create table Subscription(
+	product_type number(3),
+	user_idx number(10),
+	sub_regidate date,
+	sub_enddate date,
+	sub_price number(20)
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

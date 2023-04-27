@@ -19,9 +19,15 @@ public class TotalService {
 		System.out.println("Service 생성자 : " + userDao);
 	} // end of constructor
 
-	public List<UserVO> selectList() {
-		List<UserVO> list = userDao.selectList();
-		return list;
-	} // end of selectList()
+	public int insert(UserVO vo){
+		int res = userDao.insert(vo);
+		return res;
+	} // end of insert()
+
+	public UserVO selectOne(String user_email){
+		UserVO vo = userDao.selectOne(user_email);
+		return vo;
+	} // end of selectOne()
+
 
 } // end of class

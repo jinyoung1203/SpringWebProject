@@ -57,4 +57,5 @@ public class UserController {
 		return Common.Main.VIEW_PATH + "pages-login.jsp";
 	}
 
+
 } // end of class

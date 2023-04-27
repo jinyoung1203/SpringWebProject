@@ -4,10 +4,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="u">
 
-	
-	<select id="user_list" resultType="vo.UserVO">
-		select * from user2
-
 	<insert id="user_insert" parameterType="vo.UserVO" >
 		insert into USER1 values(
 		                        seq_user_idx.nextVal,
@@ -26,13 +22,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from user1 where user1_email = #{user_email}
 	</select>
 </mapper>
-
-<mapper namespace="p">
-	<select id="select_list" resultType="vo.ProductListTestVO">
-		select * from product;
-	</select>
-</mapper>
-
 
 
 

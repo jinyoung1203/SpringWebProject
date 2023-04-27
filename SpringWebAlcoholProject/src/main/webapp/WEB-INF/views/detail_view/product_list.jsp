@@ -212,7 +212,7 @@
         </nav>
     </div><!-- End Page Title -->
 
-    <c:forEach var="product_list" begin="1" end=""
+
     <div class="row align-items-top">
         <div class="col-lg-3">
             <!-- Card with an image on top -->

@@ -6,7 +6,10 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>:::전체보기:::</title>
-		<link href="/alcohol/resources/css/fullview.css?ver=1" rel="stylesheet"/>
+		<%-- 인텔리 제이 --%>
+		<link href="${pageContext.request.contextPath}/resources/css/fullview.css?ver=1" rel="stylesheet"/>
+		<%-- 이클립스 --%>
+		<%--<link href="/alcohol/resources/css/fullview.css?ver=1" rel="stylesheet"/>--%>
 	</head>
 	
 	<body>
@@ -18,7 +21,7 @@
 			<h5><span>${ product_count }</span>건의 품목이 조회되었습니다!</h5>
 		</div>
 		
-		<table >
+		<table>
 		<tr>
 			<c:forEach var="list" items="${ product_list }" varStatus="status">
 			<c:if test="${status.index%5==0}">
@@ -27,12 +30,14 @@
 				<td>
 				<a href="#">
 				<article class="card">
-				  <img
-				    class="card__background"
-				    src="/alcohol/resources/alcohol_image/${ list.product_thumbnail_filename }"
+				  <img class="card__background"
+				    <%-- 인텔리 제이 --%>
+				    src="${pageContext.request.contextPath}/resources/alcohol_image/${ list.product_thumbnail_filename }"
+					<%-- 이클립스 --%>
+				    <%--src="/alcohol/resources/alcohol_image/${ list.product_thumbnail_filename }"--%>
 				    alt="${ list.product_name }"
 				    width="1920"
-				    height="2193"s
+				    height="2193"
 				  />
 				  <div class="card__content | flow">
 				    <div class="card__content--container | flow">
@@ -66,6 +71,6 @@
 		        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
 		        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
 		    </div>
-		</footer><!-- End Footer -->+
+		</footer><!-- End Footer -->
 	</body>
 </html>

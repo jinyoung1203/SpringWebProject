@@ -65,9 +65,29 @@
                                                 </c:when>
                                                 <c:otherwise>
                                                     <input type="text" name="user1_email" class="form-control" id="user1_email"
-                                                           required>
+                                                           onchange="idChange();" required>
                                                 </c:otherwise>
                                             </c:choose>
+                                            <input type="button" class="input-group-text btn btn-success" id="inputGroupPrepend" value="check"
+                                                   data-bs-toggle="modal" data-bs-target="#idCheckModal" onclick="idRepetitionCheck();"/>
+                                            <div>
+                                                <div class="modal fade" id="idCheckModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <span id="idCheckSpan"></span>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="valid-feedback">Good!</div>
                                             <div class="invalid-feedback"></div>
                                         </div>
@@ -127,6 +147,7 @@
                                                    id="acceptTerms" required>
                                             <label class="form-check-label" for="acceptTerms">I agree and accept the <a
                                                     href="#">terms and conditions</a></label>
+                                            <div class="valid-feedback"></div>
                                             <div class="invalid-feedback">You must agree before submitting.</div>
                                         </div>
                                     </div>
@@ -155,6 +176,7 @@
     </div>
 </main><!-- End #main -->
 
+<script src="${pageContext.request.contextPath}/resources/js/httpRequest.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/register/register_form.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"

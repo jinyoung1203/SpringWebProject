@@ -1,17 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
+    <title>Product_list</title>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Main</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
-
-    <!-- Favicons -->
-    <link href="#" rel="icon">
-    <link href="#" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -21,19 +18,9 @@
     <!-- Vendor CSS Files -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-   <%-- <link href="${pageContext.request.contextPath}/resources/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/resources/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">--%>
 
     <!-- Template Main CSS File -->
     <link href="${pageContext.request.contextPath}/resources/assets/css/style.css" rel="stylesheet">
-
-    <!-- =======================================================
-    * Template Name: NiceAdmin
-    * Updated: Mar 09 2023 with Bootstrap v5.2.3
-    * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
 </head>
 <body>
 <c:if test="${isUser1 ne null}">
@@ -91,7 +78,8 @@
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="${pageContext.request.contextPath}resources/upload/Stephan.jpg" alt="Profile" class="rounded-circle">
+                    <img src="${pageContext.request.contextPath}resources/upload/Stephan.jpg" alt="Profile"
+                         class="rounded-circle">
                     <c:if test="${user1 eq null}">
                         <span class="d-none d-md-block dropdown-toggle ps-2">로그인 해주세요.</span>
                     </c:if>
@@ -174,7 +162,8 @@
         </li><!-- End Login Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="productList.do">
+            <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse"
+               href="productList.do">
                 <i class="bi bi-menu-button-wide"></i><span>전체상품</span>
             </a>
         </li><!-- End 전체상품 Nav -->
@@ -214,6 +203,64 @@
 </aside><!-- End Sidebar-->
 
 <main id="main" class="main">
+    <div class="pagetitle">
+        <h1>상품리스트</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="main.do">Home</a></li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <c:forEach var="product_list" begin="1" end=""
+    <div class="row align-items-top">
+        <div class="col-lg-3">
+            <!-- Card with an image on top -->
+            <div class="card">
+                <img src="assets/img/card.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card with an image on top</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                </div>
+            </div><!-- End Card with an image on top -->
+        </div>
+        <div class="col-lg-3">
+            <!-- Card with an image on top -->
+            <div class="card">
+                <img src="assets/img/card.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card with an image on top</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                </div>
+            </div><!-- End Card with an image on top -->
+        </div>
+        <div class="col-lg-3">
+            <!-- Card with an image on top -->
+            <div class="card">
+                <img src="assets/img/card.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card with an image on top</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                </div>
+            </div><!-- End Card with an image on top -->
+        </div>
+        <div class="col-lg-3">
+            <!-- Card with an image on top -->
+            <div class="card">
+                <img src="assets/img/card.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card with an image on top</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                </div>
+            </div><!-- End Card with an image on top -->
+        </div>
+    </div>
+
+
 
 
 </main><!-- End #main -->
@@ -238,9 +285,11 @@
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/register/mainjs.js"></script>
+
 <!-- Vendor JS Files -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>

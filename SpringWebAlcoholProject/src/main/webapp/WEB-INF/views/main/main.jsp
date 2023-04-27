@@ -65,7 +65,7 @@
 
             <img src="${pageContext.request.contextPath}/resources/upload/logo.jpg" alt="">         
 
-            <span class="d-none d-lg-block">홈페이지 제목</span>
+            <span class="d-none d-lg-block">주당들</span>
 
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -175,7 +175,7 @@
         </li><!-- End Login Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="productList.do">
+            <a class="nav-link collapsed" href="fullview.do">
                 <i class="bi bi-menu-button-wide"></i><span>전체상품</span>
             </a>
         </li><!-- End 전체상품 Nav -->

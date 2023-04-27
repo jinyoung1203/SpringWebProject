@@ -111,6 +111,7 @@
 <!-- Vendor JS Files -->
 <script src="${pageContext.request.contextPath}/resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+
 <!-- Template Main JS File -->
 <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 

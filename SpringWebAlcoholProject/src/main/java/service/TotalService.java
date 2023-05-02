@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.UserDAO;
+import vo.FullViewVO;
 import vo.UserVO;
 
 @Service

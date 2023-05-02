@@ -122,8 +122,8 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <span>Account Settings</span>
+                                <a class="dropdown-item d-flex align-items-center" href="user_review.do?user1_idx=${user1.user1_idx}">
+                                    <span>Review</span>
                                 </a>
                             </li>
                             <li>

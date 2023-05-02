@@ -20,5 +20,9 @@ public class Common {
 	public static class Detail_view{
 		public static final String VIEW_PATH = "/WEB-INF/views/detail_view/";
 	}
-
+	
+	public static class Review{
+		public static final String VIEW_PATH = "/WEB-INF/views/review/";
+	}
+	
 } // end of class

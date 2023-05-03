@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="b">
+	<select id="preorder_list_product" resultType="product">
+		SELECT *
+		FROM product
+		WHERE product_idx IN
+		<foreach item="index" collection="preorder_idx" separator=","
+			open="(" close=")">
+			#{index}
+		</foreach>
+		ORDER BY producer_idx ASC;
+	</select>
+	<select id="producerName" resultType="producer">
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

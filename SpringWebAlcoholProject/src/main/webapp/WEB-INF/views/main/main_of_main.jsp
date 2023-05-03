@@ -43,8 +43,8 @@
     <div class="container">
         <div class="masthead-subheading"><span class="text-black">인류의 적, 마셔 없애자</span></div>
         <div class="masthead-heading text-uppercase"><span class="text-black">주 당 들</span></div>
-        <a class="btn btn-primary btn-xl text-uppercase" href="main.do">쇼핑하기</a>
-        <a class="btn btn-primary btn-xl text-uppercase" href="#services">구독하기</a>
+        <a class="btn btn-primary btn-xl text-uppercase" href="main.do"><span class="btn-span">쇼핑하기</span></a>
+        <a class="btn btn-primary btn-xl text-uppercase" href="#services"><span class="btn-span">구독하기</span></a>
     </div>
 </header>
 

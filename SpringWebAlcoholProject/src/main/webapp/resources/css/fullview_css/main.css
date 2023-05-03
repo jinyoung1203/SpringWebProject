@@ -43,7 +43,8 @@ a {
 }
 
 a:hover {
-  color: #00b6a1;
+  color:  var(--color-primary);
+  font-weight:bold;
   text-decoration: none;
 }
 
@@ -59,6 +60,34 @@ h6 {
 /*--------------------------------------------------------------
 # Sections & Section Header
 --------------------------------------------------------------*/
+
+.card__title{
+	color: white;
+	font-size:23px;
+	font-weight: bold;
+}
+
+.product{
+	color:black;
+}
+.h3{
+	font-size: 25px;
+	font-weight: bold;
+}
+.h4{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.fullview{
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+.introduce{
+	font-weight: bold;
+	
+}
+
 section {
   padding: 60px 0;
   overflow: hidden;

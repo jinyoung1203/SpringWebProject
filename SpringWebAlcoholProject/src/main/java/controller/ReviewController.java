@@ -44,7 +44,7 @@ public class ReviewController {
 		return Common.Review.VIEW_PATH + "user_review_board.jsp";
 	} 
 
-	@RequestMapping("/review_write.do")
+	@RequestMapping("/review_write.do")	
 	public String insert_form(Model model) {
 		List<ReviewVO> list = service.selectList_review();
 		model.addAttribute("review_list", list);

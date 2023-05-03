@@ -19,6 +19,7 @@ import vo.UserVO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Map;
 
 @Controller
 public class LoginController {
@@ -32,6 +33,7 @@ public class LoginController {
 
     private NaverLoginBO naverLoginBO;
     private String apiResult = null;
+    private String apiResult2 = null;
 
     private KakaoLoginBO kakaoLoginBO;
 
@@ -91,6 +93,7 @@ public class LoginController {
         // System.out.println(state);
         OAuth2AccessToken oauthToken;
         oauthToken = naverLoginBO.getAccessToken(session, code, state);
+        System.out.println("naverCallback, oauthToken : " + oauthToken);
         // 로그인 사용자 정보를 읽어온다.
         apiResult = naverLoginBO.getUserProfile(oauthToken);
 
@@ -133,15 +136,25 @@ public class LoginController {
     public String kakaoCallback(Model model, @RequestParam String code, @RequestParam String state) throws Exception {
         System.out.println("kakao callback 실행 됨");
         OAuth2AccessToken oAuth2AccessToken;
-        oAuth2AccessToken = kakaoLoginBO.getAccessToken(session, code, state);
+        // oAuth2AccessToken = kakaoLoginBO.getAccessToken(session, code, state);
+        System.out.println("code : " + code);
+        String accessToken = kakaoLoginBO.getAccessToken(session, code, state);
+        // System.out.println("oAuth2AccessToken : " + oAuth2AccessToken);
+        System.out.println("accessToken : " + accessToken);
+
+        // 사용자 정보
+        Map<String, Object> userInfo = kakaoLoginBO.getUserInfo(accessToken);
+        System.out.println("userInfo : " + userInfo);
+        model.addAttribute("userInfo", userInfo);
+
 
         // 로그인 사용자 정보를 읽어옴
-        apiResult = kakaoLoginBO.getUserProfile(oAuth2AccessToken);
+        // apiResult2 = kakaoLoginBO.getUserProfile(oAuth2AccessToken);
 
-        JSONParser jsonParser = new JSONParser();
+        /*JSONParser jsonParser = new JSONParser();
         JSONObject jsonObj;
 
-        jsonObj = (JSONObject) jsonParser.parse(apiResult);
+        jsonObj = (JSONObject) jsonParser.parse(apiResult2);
         JSONObject response_obj1 = (JSONObject) jsonObj.get("kakao_account");
         JSONObject response_obj2 = (JSONObject) response_obj1.get("profile");
 
@@ -152,11 +165,11 @@ public class LoginController {
         System.out.println(name);
 
         // 세션에 사용자 정보 등록
-        model.addAttribute("signIn", apiResult);
+        model.addAttribute("signIn", apiResult2);
         model.addAttribute("email", email);
-        model.addAttribute("name", name);
+        model.addAttribute("name", name);*/
 
-        return "redirct:/naver_register_form.do";
+        return Common.Login.VIEW_PATH + "register_form.jsp";
     } // end of kakaocallback()
 
     @RequestMapping("/naver_register_form.do")

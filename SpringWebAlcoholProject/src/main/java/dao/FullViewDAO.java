@@ -28,5 +28,11 @@ public class FullViewDAO {
 		int product_count = sqlSession.selectOne("p.product_count");
 		return product_count;
 	}
+	
+	public List<FullViewVO> search_select(String selections){
+		System.out.println(selections);
+		List<FullViewVO> list = sqlSession.selectList("p.product_search");
+		return list;
+	}
 
 }

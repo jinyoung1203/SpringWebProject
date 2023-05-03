@@ -41,6 +41,15 @@ public class FullViewController {
 		return Common.full_view.VIEW_PATH + "full_view_lsj.jsp";
 	}
 	
+	@RequestMapping("/search.do")
+	public String search_select(Model model, String[] selections) {
+		for(int i=0; i<selections.length; i++) {
+			System.out.println(selections[i]);
+			
+		}
+		return Common.full_view.VIEW_PATH + "full_view_lsj.jsp";
+	}
+	
 	
 
 }

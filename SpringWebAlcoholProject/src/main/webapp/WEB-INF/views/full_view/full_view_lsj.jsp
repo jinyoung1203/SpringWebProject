@@ -511,6 +511,19 @@
                  }
              }
              
+             var servlet = "";
+             for(var i = 0; i<this.selections.length; i++){
+            	 
+            	 if(i == 0){
+            	 servlet += "selections="+this.selections[i];
+            		 
+            	 }else{
+            		 
+            	 servlet += "&selections="+this.selections[i];
+            	 }
+             }
+             
+	         location.href = "search.do?selections="+this.selections;
          },
          
        
@@ -526,7 +539,7 @@
                  error("ERROR: This does not look like an array.");
                  return;
              }
-             alert(this.selections);
+             
              this.selections = arr;
              this.selectionStatus();
              this.setSelectionsString();

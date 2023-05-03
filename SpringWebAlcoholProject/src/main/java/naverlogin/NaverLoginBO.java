@@ -64,6 +64,7 @@ public class NaverLoginBO {
             System.out.println("getAccessToken 실행 됨");
             // Scribe에서 제공하는 AccessToken 획득 기능으로 네이버 아이디 로그인 Access Token을 획득
             OAuth2AccessToken accessToken = oauthService.getAccessToken(code);
+            System.out.println("accessToken : " + accessToken);
             return accessToken;
         }
         System.out.println("getAccessToken() 메서드 if문 안으로 안들어감");

@@ -18,10 +18,22 @@ public class UserDAO {
 		this.sqlSession = sqlSession;
 		System.out.println("DAO 생성자 : " + sqlSession);
 	} // end of constructor
-	
-	public List<UserVO> selectList(){
-		List<UserVO> list = sqlSession.selectList("u.user_list");
-		return list;
-	} // end of selectList()
+
+	public int insert(UserVO vo){
+		int res = sqlSession.insert("u.user_insert", vo);
+		return res;
+	} // end of insert()
+
+	public UserVO selectOne(String user_email){
+		System.out.println("------ dao selectOne() ------");
+		System.out.println("user_email : " + user_email);
+		UserVO vo = sqlSession.selectOne("u.user_selectOne", user_email);
+		System.out.println("vo 객체 : " + vo);
+		return vo;
+	} // end of selectOne()
+
+
+
+
 
 } // end of class

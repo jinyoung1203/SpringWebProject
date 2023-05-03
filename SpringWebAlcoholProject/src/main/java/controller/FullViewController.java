@@ -38,7 +38,7 @@ public class FullViewController {
 		int product_count = service.selectCount();
 		model.addAttribute("product_count", product_count);
 		model.addAttribute("product_list", product_list);
-		return Common.full_view.VIEW_PATH + "full_view.jsp";
+		return Common.full_view.VIEW_PATH + "full_view_lsj.jsp";
 	}
 	
 	

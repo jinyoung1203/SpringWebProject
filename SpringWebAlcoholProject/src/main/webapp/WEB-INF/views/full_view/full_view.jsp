@@ -6,7 +6,12 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>:::전체보기:::</title>
-		<link href="/alcohol/resources/css/fullview.css?ver=1" rel="stylesheet"/>
+
+		<%-- 인텔리 제이 --%>
+		<link href="${pageContext.request.contextPath}/resources/css/fullview.css?ver=1" rel="stylesheet"/>
+		<%-- 이클립스 --%>
+		<%--<link href="/alcohol/resources/css/fullview.css?ver=1" rel="stylesheet"/>--%>
+
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
 		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -21,6 +26,9 @@
 			<h5>주당들의 모든 술을 만나보세요!</h5>
 		</div>
 		
+
+		<table>
+
 		<!-- Search select -->
 		
 		<div class="head">
@@ -157,7 +165,8 @@
 		
 		
 		<!-- Full view -->
-		<table >
+		<table>
+
 		<tr>
 			<c:forEach var="list" items="${ product_list }" varStatus="status">
 			<c:if test="${status.index%5==0}">
@@ -166,9 +175,11 @@
 				<td>
 				
 				<article class="card">
-				  <img
-				    class="card__background"
-				    src="/alcohol/resources/alcohol_image/${ list.product_thumbnail_filename }"
+				  <img class="card__background"
+				    <%-- 인텔리 제이 --%>
+				    src="${pageContext.request.contextPath}/resources/alcohol_image/${ list.product_thumbnail_filename }"
+					<%-- 이클립스 --%>
+				    <%--src="/alcohol/resources/alcohol_image/${ list.product_thumbnail_filename }"--%>
 				    alt="${ list.product_name }"
 				    width="1920"
 				    height="2193"
@@ -207,6 +218,7 @@
 		        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
 		    </div>
 		</footer><!-- End Footer -->
+
 		
 		
 		<script>
@@ -413,5 +425,6 @@
 
 	   
 		</script>
+
 	</body>
 </html>

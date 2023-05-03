@@ -32,6 +32,8 @@
     <div class="col-3"></div>
 </div>
 
+<img alt="" src="">
+
 <script src="../../../resources/js/bootstrap.min.js"></script>
 </body>
 </html>

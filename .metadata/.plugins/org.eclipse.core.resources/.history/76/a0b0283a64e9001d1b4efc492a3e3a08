@@ -37,31 +37,62 @@
 <link
 	href="${pageContext.request.contextPath}/resources/css/main_css/main.css"
 	rel="stylesheet">
-	
+
+<script src="${pageContext.request.contextPath}/resources/js/httpRequest.js"></script>
 <script>
-	function amount(fun){
-		
-		let f = document.ff;
-		f.amount.innerHTML=10;
+	let idx='<%=request.getParameter("idx")%>'
+	window.onload = function(){
+		var url ='buy_product.do';
+		var param ='idx='+idx;
+		sendRequest(url,param,resFn,"GET")
+	}
+	let price;
+	function resFn() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			price = parseInt(xhr.responseText);
+			price +=3000;
+			
+			document.ff.totPrice.innerHTML=price;
+		}
+	}
+	
+	function amount_pm(op) {
+		const f = document.ff;
+		const amount = parseInt(f.amount.innerHTML);
+		let totPrice = parseInt(f.totPrice.innerHTML);
+
+		if (op == '+') {
+			f.amount.innerHTML = amount + 1;
+			totPrice += price;
+		} else if (op == '-' && amount > 1) {
+			f.amount.innerHTML = amount - 1;
+			totPrice -= price;
+		}
+
+		f.totPrice.innerHTML = totPrice;
 	}
 </script>
 </head>
 <body>
-	<c:set var="idx" value="request.getParameter('idx')"></c:set>
+<%-- <jsp:include page="buy.jsp?idx='상품일련번호'"></jsp:include> --%>
+
 	<form name="ff" class="card">
+	<input type="hidden">
 		<div class="card-body">수량</div>
 		<div class="card-body row">
 			<div class="btn-group" role="group" aria-label="Basic outlined">
-				<button type="button" class="btn btn-outline-primary col" onclick="amount('-')">-</button>
-				<button type="button" name="amount" class="btn btn-outline-primary col-6"
-					disabled>1</button>
-				<button type="button" class="btn btn-outline-primary col" onclick="amount('+')">+</button>
+				<button type="button" class="btn btn-outline-primary col"
+					onclick="amount_pm('-');">-</button>
+				<button type="button" name="amount"
+					class="btn btn-outline-primary col-6" disabled>1</button>
+				<button type="button" class="btn btn-outline-primary col"
+					onclick="amount_pm('+');">+</button>
 			</div>
 		</div>
 		<div class="card-body">총 가격</div>
 		<div class="card-body row">
-			<button type="button" name="totPrice" class="btn btn-outline-primary col"
-					disabled>1000</button>
+			<button type="button" name="totPrice"
+				class="btn btn-outline-primary col" disabled></button>
 		</div>
 		<div class="card-body">배송료는 3000원입니다.</div>
 		<div class="card-body row">
@@ -74,7 +105,7 @@
 	</form>
 
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-	<script
+ 	<script
 		src="${pageContext.request.contextPath}/resources/js/register/mainjs.js"></script>
 	<!-- Vendor JS Files -->
 	<script

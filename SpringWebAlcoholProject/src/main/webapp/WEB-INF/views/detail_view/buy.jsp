@@ -40,17 +40,20 @@
 
 <script src="${pageContext.request.contextPath}/resources/js/httpRequest.js"></script>
 <script>
+	
 	window.onload = function(){
+		let idx='<%=request.getParameter("idx")%>';
+		document.ff.idx.value=idx;
 		var url ='buy_product.do';
-		var param ='idx='+'<%=request.getParameter("idx")%>';
-		sendRequest(url,param,resFn,"GET")
+		var param ='idx='+idx;
+		sendRequest(url,param,resFn,"POST")
 	}
 	let price;
 	function resFn() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			price = parseInt(xhr.responseText);
 			price +=3000;
-			
+			JSON.parse(xhr.resposeText);
 			document.ff.totPrice.innerHTML=price;
 		}
 	}
@@ -75,6 +78,7 @@
 <body>
 <%-- <jsp:include page="buy.jsp?idx='상품일련번호'"></jsp:include> --%>
 	<form name="ff" class="card">
+	<input name="idx" type="hidden">
 		<div class="card-body">수량</div>
 		<div class="card-body row">
 			<div class="btn-group" role="group" aria-label="Basic outlined">

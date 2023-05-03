@@ -217,8 +217,8 @@
                 </div>
 
                 <div class="col-lg-4">
-
-                    <div class="sidebar border border-primary">
+                    <jsp:include page="buy.jsp?idx=${vo1.product_idx}"></jsp:include>
+                    <%--<div class="sidebar border border-primary">
 
                         <div class="sidebar-item search-form">
                             <h3 class="sidebar-title">Search</h3>
@@ -240,7 +240,7 @@
                             </ul>
                         </div><!-- End sidebar categories-->
 
-                    </div><!-- End Blog Sidebar -->
+                    </div><!-- End Blog Sidebar -->--%>
 
                 </div>
             </div>

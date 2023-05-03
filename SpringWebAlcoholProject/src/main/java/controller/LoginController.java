@@ -135,7 +135,7 @@ public class LoginController {
     @RequestMapping(value = "/kakaoCallback.do", method = {RequestMethod.GET, RequestMethod.POST})
     public String kakaoCallback(Model model, @RequestParam String code, @RequestParam String state) throws Exception {
         System.out.println("kakao callback 실행 됨");
-        OAuth2AccessToken oAuth2AccessToken;
+        // OAuth2AccessToken oAuth2AccessToken;
         // oAuth2AccessToken = kakaoLoginBO.getAccessToken(session, code, state);
         System.out.println("code : " + code);
         String accessToken = kakaoLoginBO.getAccessToken(session, code, state);

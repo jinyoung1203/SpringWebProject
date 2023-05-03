@@ -32,7 +32,6 @@
     <link href="${pageContext.request.contextPath}/resources/assets/vendor/bootstrap-icons/bootstrap-icons.css"
           rel="stylesheet">
 
-
     <!-- Template Main CSS File -->
     <link href="${pageContext.request.contextPath}/resources/css/fullview_css/main.css" rel="stylesheet">
 
@@ -307,7 +306,10 @@
 				<article class="allcard">
 				  <img
 				    class="card__background"
-				    src="/alcohol/resources/alcohol_image/${ list.product_thumbnail_filename }"
+					<%--이클립스--%>
+				    <%--src="/alcohol/resources/alcohol_image/${ list.product_thumbnail_filename }"--%>
+				    <%--인텔리제이--%>
+					src="../../../resources/alcohol_image/${ list.product_thumbnail_filename }"
 				    alt="${ list.product_name }"
 				    width="1920"
 				    height="2193"

@@ -36,7 +36,7 @@ public class KakaoLoginBO {
 
         OAuth20Service oAuth20Service = new ServiceBuilder()
                 .apiKey(KAKAO_CLIENT_ID)
-                //.apiSecret(KAKAO_CLIENT_SECRET)
+                // .apiSecret(KAKAO_CLIENT_SECRET)
                 .callback(KAKAO_REDIRECT_URI)
                 .state(state)
                 .build(KakaoLoginApi.getInstance());

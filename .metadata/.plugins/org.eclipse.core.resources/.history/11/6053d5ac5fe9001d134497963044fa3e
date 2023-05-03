@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import dao.BuyDAO;
+import vo.FullViewVO;
 
 @Controller
 public class BuyController {
@@ -24,7 +25,7 @@ public class BuyController {
 	
 	@RequestMapping("/buy_product.do")
 	@ResponseBody
-	public int buyProduct(int idx) {
-		return buydao.selectProduct(idx).getProduct_price();
+	public FullViewVO buyProduct(int idx) {
+		return buydao.selectProduct(idx);
 	}
 }

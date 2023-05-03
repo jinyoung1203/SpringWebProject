@@ -42,21 +42,19 @@
 <script>
 	window.onload = function(){
 		var url ='buy_product.do';
-		var param ='idx='+'301';
+		var param ='idx='+${idx};
 		sendRequest(url,param,resFn,"POST")
 
 	}
-	let product;
+	let price;
 	function resFn() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
-			product = JSON.parse(xhr.responseText);
-			document.ff.totPrice.innerHTML=product.product_price;
+			price = xhr.responseText;
 		}
 	}
 	function amount_pm(op) {
 		const f = document.ff;
 		const amount = parseInt(f.amount.innerHTML);
-		const price = product.product_price; // 가격
 		let totPrice = parseInt(f.totPrice.innerHTML);
 
 		if (op == '+') {
@@ -72,6 +70,7 @@
 </script>
 </head>
 <body>
+<jsp:include page="buy.jsp?idx='상품일련번호'"></jsp:include>
 	<form name="ff" class="card">
 		<div class="card-body">수량</div>
 		<div class="card-body row">

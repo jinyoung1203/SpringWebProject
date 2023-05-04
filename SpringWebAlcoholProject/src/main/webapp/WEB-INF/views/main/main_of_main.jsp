@@ -21,7 +21,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css"/>
     <!-- Core theme CSS (includes Bootstrap)-->
     <%-- 인텔리제이 --%>
-    <link href="${pageContext.request.contextPath}/resources/startbootstrap-agency-gh-pages/css/styles.css?ver=1" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/resources/startbootstrap-agency-gh-pages/css/styles.css" rel="stylesheet"/>
     <%-- 이클립스 --%>
     <%--<link href="/alcohol/resources/startbootstrap-agency-gh-pages/css/styles.css?ver=1" rel="stylesheet"/>--%>
 </head>

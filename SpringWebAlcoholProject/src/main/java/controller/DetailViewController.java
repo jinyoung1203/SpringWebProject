@@ -30,6 +30,4 @@ public class DetailViewController {
         return Common.Detail_view.VIEW_PATH + "product_detail_view.jsp";
     } // end of detailview()
 
-    // sdfssdfsdf
-
 } // end of class

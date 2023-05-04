@@ -10,7 +10,13 @@ import org.codehaus.jackson.JsonParser;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
+import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
 import java.io.*;
@@ -80,7 +86,7 @@ public class KakaoLoginBO {
             }
             System.out.println("response body : " + result);
 
-            //Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
+            // jackson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
             JSONParser parser = new JSONParser();
             JSONObject jsonObj;
 
@@ -133,7 +139,7 @@ public class KakaoLoginBO {
         return response.getBody();
     } // end of getUserProfile()
 
-    public Map<String, Object> getUserInfo(String access_token) throws IOException {
+    /*public Map<String, Object> getUserInfo(String access_token) throws IOException {
         System.out.println("------ getUserInfo ------");
         String host = "https://kapi.kakao.com/v2/user/me";
         Map<String, Object> result = new HashMap<String, Object>();
@@ -183,7 +189,7 @@ public class KakaoLoginBO {
         }
 
         return result;
-    } // end of getUserInfo
+    } // end of getUserInfo*/
 
     private String generateRandomString() {
         return UUID.randomUUID().toString();

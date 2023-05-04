@@ -12,9 +12,6 @@
     <meta content="" name="keywords">
 
     <!-- Google Fonts -->
-    <%--<link href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-          rel="stylesheet">--%>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
@@ -34,102 +31,101 @@
 <jsp:include page="../main/header.jsp"></jsp:include>
 
 <main id="main" class="main">
-    <section id="blog" class="blog">
-        <div class="container" data-aos="fade-up">
-
-            <div class="row g-5">
-
-                <div class="col-lg-8">
+    <section id="blog">
+        <div class="col-1">
+            <jsp:include page="left_navbar.jsp"></jsp:include>
+        </div>
+        <div class="container border btn-primary">
+            <div class="row">
+                <br>
+                <br>
+            </div>
+            <div class="row">
+                <div class="col-9">
 
                     <article class="blog-details">
 
                         <div class="post-img border border-primary">
                             <div class="row gx-4 gx-lg-5 align-items-center">
-                                <div class="col-md-6 d-flex justify-content-center border border-primary">
+                                <div class="col-6 text-center border border-primary">
                                     <img src="${pageContext.request.contextPath}/resources/alcohol_image/${vo1.product_thumbnail_filename}"
                                          alt="" class="img-fluid">
                                 </div>
-                                <div class="col-md-6">
-                                    <h1 class="display-5 fw-bolder">${vo1.product_name}</h1>
-                                        <p class="lead">${vo1.product_simple_content}</p>
+                                <div class="col-6">
+                                    <h1 class="display-5 fw-bolder text-primary">${vo1.product_name}</h1>
+                                    <p class="lead fst-italic fw-bold text-warning">${vo1.product_simple_content}</p>
                                     <div class="d-flex">
-                                        <span>주종 : ${vo1.product_type}</span>
+                                        <span class="fw-bold fst-italic ">주종 : ${vo1.product_type}</span>
                                     </div>
                                     <div class="d-flex">
-                                        <span>도수 : ${vo1.product_alcohol_degree}%</span>
+                                        <span class="fw-bold fst-italic">도수 : ${vo1.product_alcohol_degree}%</span>
                                     </div>
                                     <div class="d-flex">
-                                        <span>용량 : ${vo1.product_capacity}</span>
+                                        <span class="fw-bold fst-italic">용량 : ${vo1.product_capacity}</span>
                                     </div>
                                     <div class="d-flex">
                                         <br>
                                     </div>
-                                    <div class="fs-5 mb-5">
-                                        판매가격 :
-                                        <span><fmt:formatNumber value="${vo1.product_price}" pattern="#,###"/>원</span>
+                                    <div class="fs-6 mb-5">
+                                        <span class="fw-bold">판매가격 : <br></span>
+                                        <h4 class="fw-bold">&nbsp;&nbsp;<fmt:formatNumber value="${vo1.product_price}"
+                                                                                          pattern="#,###"/>원</h4>
                                     </div>
                                     <div class="d-flex">
-                                        <span>유통기한 : ${vo1.product_expiration_date}</span>
+                                        <span class="fst-italic">유통기한 : ${vo1.product_expiration_date}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         <div class="d-flex justify-content-center border border-primary">
-                            <img class="img-fluid" src="${pageContext.request.contextPath}/resources/alcohol_image/${vo1.product_filename1}">
+                            <div class="col-10">
+                                <jsp:include
+                                        page="taste_rating.jsp?product_sweet_rating=${vo1.product_sweet_rating}&product_sourish_rating=${vo1.product_sourish_rating}&product_cleantaste_rating=${vo1.product_cleantaste_rating}&product_bodytaste_rating=${vo1.product_bodytaste_rating}&product_sparkling_rating=${vo1.product_sparkling_rating}"></jsp:include>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-center border border-primary">
+                            <h1 class="fw-bold text-primary">[${vo1.product_name}]</h1>
+                        </div>
+                        <div class="d-flex justify-content-center border border-primary">
+                            <img class="img-fluid"
+                                 src="${pageContext.request.contextPath}/resources/alcohol_image/${vo1.product_filename1}">
                         </div>
                         <div class="content border border-primary">
-                            <p>
+                            <h2 class="fw-bold text-primary">[${vo1.product_name}] - 1</h2>
+                            <p class="fw-bold fs-4 text-black-50 fst-italic">
                                 ${vo1.product_detail_content1}
                             </p>
                         </div><!-- End post content -->
                         <div class="d-flex justify-content-center border border-primary">
-                            <img class="img-fluid" src="${pageContext.request.contextPath}/resources/alcohol_image/${vo1.product_filename2}">
+                            <img class="img-fluid"
+                                 src="${pageContext.request.contextPath}/resources/alcohol_image/${vo1.product_filename2}">
                         </div>
                         <div class="content border border-primary">
-                            <p>
+                            <h2 class="fw-bold text-primary">[${vo1.product_name}] - 2</h2>
+                            <p class="fw-bold fs-4 text-black-50 fst-italic">
                                 ${vo1.product_detail_content2}
                             </p>
                         </div><!-- End post content -->
                         <div class="d-flex justify-content-center border border-primary">
                             <div>
-                                <h2>어울리는 안주</h2>
-                            </div>
-                            <div>
-                                <p>${vo1.product_point_snack}</p>
+                                <h2 class="fw-bold text-primary">어울리는 안주</h2>
                             </div>
                         </div>
-
+                        <div class="d-flex justify-content-center border border-primary">
+                            <div>
+                                <p class="fs-5 fst-italic">${vo1.product_point_snack}</p>
+                            </div>
+                        </div>
 
                     </article><!-- End blog post -->
 
                 </div>
 
-                <div class="col-lg-4">
+                <%-- sidebar 결제하기 파트 --%>
+                <div class="col-3">
                     <jsp:include page="buy.jsp?idx=${vo1.product_idx}"></jsp:include>
-                    <%--<div class="sidebar border border-primary">
-
-                        <div class="sidebar-item search-form">
-                            <h3 class="sidebar-title">Search</h3>
-                            <form action="" class="mt-3">
-                                <input type="text">
-                                <button type="submit"><i class="bi bi-search"></i></button>
-                            </form>
-                        </div><!-- End sidebar search formn-->
-
-                        <div class="sidebar-item categories">
-                            <h3 class="sidebar-title">Categories</h3>
-                            <ul class="mt-3">
-                                <li><a href="#">General <span>(25)</span></a></li>
-                                <li><a href="#">Lifestyle <span>(12)</span></a></li>
-                                <li><a href="#">Travel <span>(5)</span></a></li>
-                                <li><a href="#">Design <span>(22)</span></a></li>
-                                <li><a href="#">Creative <span>(8)</span></a></li>
-                                <li><a href="#">Educaion <span>(14)</span></a></li>
-                            </ul>
-                        </div><!-- End sidebar categories-->
-
-                    </div><!-- End Blog Sidebar -->--%>
-
                 </div>
             </div>
 

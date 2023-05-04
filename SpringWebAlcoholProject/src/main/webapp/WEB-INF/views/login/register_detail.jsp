@@ -40,7 +40,7 @@
                         <div class="d-flex justify-content-center py-4">
                             <a href="main.do" class="logo d-flex align-items-center w-auto">
                                 <img src="${pageContext.request.contextPath}/resources/upload/logo.jpg" alt="">
-                                <span class="d-none d-lg-block">홈페이지 이름</span>
+                                <span class="d-none d-lg-block">주당들</span>
                             </a>
                         </div><!-- End Logo -->
 

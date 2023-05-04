@@ -19,6 +19,7 @@ import vo.UserVO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.Map;
 
 @Controller
@@ -315,4 +316,29 @@ public class LoginController {
         System.out.println("result : " + result);
         return result;
     } // end of idRepetitionCheck()
+
+    @RequestMapping("my_information_modify.do")
+    public String myInformationModify() {
+        System.out.println("----- my_information_modify.do -----");
+
+        return Common.Login.VIEW_PATH + "register_modify.jsp";
+    } // end of myInformationModify()
+
+    @RequestMapping("register_modify.do")
+    public String registerModify(Model model, UserVO vo) throws IllegalAccessException {
+
+        System.out.println("----- register_modify.do -----");
+        Object voObj = vo;
+        for(Field field : voObj.getClass().getDeclaredFields()){
+            field.setAccessible(true);
+            Object value = field.get(voObj);
+            System.out.println("field : " + field.getName() + " , value : " + value);
+        } // end of for
+
+        int res = service.update(vo);
+
+        model.addAttribute("res", res);
+        return Common.Main.VIEW_PATH + "main.jsp";
+    } // end of registerModify()
+
 } // end of class

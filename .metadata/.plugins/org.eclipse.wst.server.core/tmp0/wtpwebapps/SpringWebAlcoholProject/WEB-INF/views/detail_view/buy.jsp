@@ -38,66 +38,77 @@
 	href="${pageContext.request.contextPath}/resources/css/main_css/main.css"
 	rel="stylesheet">
 
-<script src="${pageContext.request.contextPath}/resources/js/httpRequest.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/httpRequest.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
 	
 	window.onload = function(){
 		let idx='<%=request.getParameter("idx")%>';
-		document.ff.idx.value=idx;
-		var url ='buy_product.do';
-		var param ='idx='+idx;
-		sendRequest(url,param,resFn,"POST")
+		document.ff.idx.value = idx;
+		var url = 'buy_product.do';
+		var param = 'idx=' + idx;
+		sendRequest(url, param, resFn, "POST")
 	}
 	let price;
 	function resFn() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			price = parseInt(xhr.responseText);
-			price +=3000;
-			JSON.parse(xhr.resposeText);
-			document.ff.totPrice.innerHTML=price;
+
+			document.ff.totPrice.innerHTML = price + 3000;
 		}
 	}
-	
+
 	function amount_pm(op) {
 		const f = document.ff;
-		const amount = parseInt(f.amount.innerHTML);
+		const amount = parseInt(f.amount.value);
 		let totPrice = parseInt(f.totPrice.innerHTML);
 
 		if (op == '+') {
-			f.amount.innerHTML = amount + 1;
+			f.amount.value = amount + 1;
 			totPrice += price;
 		} else if (op == '-' && amount > 1) {
-			f.amount.innerHTML = amount - 1;
+			f.amount.value = amount - 1;
 			totPrice -= price;
 		}
 
 		f.totPrice.innerHTML = totPrice;
 	}
+	function cart(f){
+		f.action="cartAdd.do";
+		f.price.value=f.totPrice.innerHTML;
+		f.submit();
+		
+	}
+</script>
+<script>
 </script>
 </head>
 <body>
-<%-- <jsp:include page="buy.jsp?idx='상품일련번호'"></jsp:include> --%>
+	<%-- <jsp:include page="buy.jsp?idx='상품일련번호'"></jsp:include> --%>
 	<form name="ff" class="card">
-	<input name="idx" type="hidden">
+		<input name="idx" type="hidden">
+		<input name="price" type="hidden">
 		<div class="card-body">수량</div>
 		<div class="card-body row">
 			<div class="btn-group" role="group" aria-label="Basic outlined">
 				<button type="button" class="btn btn-outline-primary col"
 					onclick="amount_pm('-');">-</button>
-				<button type="button" name="amount"
-					class="btn btn-outline-primary col-6" disabled>1</button>
+				<input name="amount" id="amount" value="1"
+					class="btn btn-outline-primary col-6">
 				<button type="button" class="btn btn-outline-primary col"
 					onclick="amount_pm('+');">+</button>
 			</div>
 		</div>
 		<div class="card-body">총 가격</div>
 		<div class="card-body row">
-			<button type="button" name="totPrice"
+			<button type="button" name="totPrice" id="totPrice"
 				class="btn btn-outline-primary col" disabled></button>
 		</div>
 		<div class="card-body">배송료는 3000원입니다.</div>
 		<div class="card-body row">
-			<button type="button" class="btn btn-outline-primary col">장바구니</button>
+			<button type="button" class="btn btn-outline-primary col" onclick="cart(this.form);">장바구니</button>
 			<button type="button" class="btn btn-outline-primary col">선물하기</button>
 		</div>
 		<div class="card-body row">
@@ -105,8 +116,8 @@
 		</div>
 	</form>
 
-	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
- 	<script
+	
+	<script
 		src="${pageContext.request.contextPath}/resources/js/register/mainjs.js"></script>
 	<!-- Vendor JS Files -->
 	<script

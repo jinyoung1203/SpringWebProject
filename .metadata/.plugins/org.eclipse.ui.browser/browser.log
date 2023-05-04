@@ -943,3 +943,19 @@
 
 4월 18, 2023 09:09:03.304 NEW SESSION
 4월 18, 2023 09:09:03.304 INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+
+5월 04, 2023 10:41:45.587 NEW SESSION
+5월 04, 2023 10:41:45.587 [8656:3392:0504/104145.576:ERROR:interface_endpoint_client.cc(696)] Message 0 rejected by interface blink.mojom.WidgetHost
+5월 04, 2023 10:41:45.588 [8656:3392:0504/104145.576:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 04, 2023 11:07:23.209 [8656:3392:0504/110723.209:ERROR:CONSOLE(1)] "Request Network.enable failed. {"code":-32601,"message":"'Network.enable' wasn't found"}", source: devtools://devtools/bundled/devtools-frontend/front_end/core/protocol_client/protocol_client.js (1)
+5월 04, 2023 11:07:23.209 [8656:3392:0504/110723.209:ERROR:CONSOLE(1)] "Request Network.setAttachDebugStack failed. {"code":-32601,"message":"'Network.setAttachDebugStack' wasn't found"}", source: devtools://devtools/bundled/devtools-frontend/front_end/core/protocol_client/protocol_client.js (1)
+5월 04, 2023 11:07:23.209 [8656:3392:0504/110723.209:ERROR:CONSOLE(1)] "Request Emulation.setEmulatedMedia failed. {"code":-32601,"message":"'Emulation.setEmulatedMedia' wasn't found"}", source: devtools://devtools/bundled/devtools-frontend/front_end/core/protocol_client/protocol_client.js (1)
+5월 04, 2023 11:07:23.209 [8656:3392:0504/110723.209:ERROR:CONSOLE(1)] "Request Emulation.setEmulatedVisionDeficiency failed. {"code":-32601,"message":"'Emulation.setEmulatedVisionDeficiency' wasn't found"}", source: devtools://devtools/bundled/devtools-frontend/front_end/core/protocol_client/protocol_client.js (1)
+5월 04, 2023 11:07:23.210 [8656:3392:0504/110723.209:ERROR:CONSOLE(1)] "Request Network.enable failed. {"code":-32601,"message":"'Network.enable' wasn't found"}", source: devtools://devtools/bundled/devtools-frontend/front_end/core/protocol_client/protocol_client.js (1)
+5월 04, 2023 11:07:23.210 [8656:3392:0504/110723.209:ERROR:CONSOLE(1)] "Request Network.clearAcceptedEncodingsOverride failed. {"code":-32601,"message":"'Network.clearAcceptedEncodingsOverride' wasn't found"}", source: devtools://devtools/bundled/devtools-frontend/front_end/core/protocol_client/protocol_client.js (1)
+5월 04, 2023 11:07:23.210 [8656:3392:0504/110723.209:ERROR:CONSOLE(1)] "Request Network.setAttachDebugStack failed. {"code":-32601,"message":"'Network.setAttachDebugStack' wasn't found"}", source: devtools://devtools/bundled/devtools-frontend/front_end/core/protocol_client/protocol_client.js (1)
+5월 04, 2023 11:07:23.210 [8656:3392:0504/110723.209:ERROR:CONSOLE(1)] "Request Emulation.setEmulatedMedia failed. {"code":-32601,"message":"'Emulation.setEmulatedMedia' wasn't found"}", source: devtools://devtools/bundled/devtools-frontend/front_end/core/protocol_client/protocol_client.js (1)
+5월 04, 2023 11:07:23.210 [8656:3392:0504/110723.209:ERROR:CONSOLE(1)] "Request Emulation.setEmulatedVisionDeficiency failed. {"code":-32601,"message":"'Emulation.setEmulatedVisionDeficiency' wasn't found"}", source: devtools://devtools/bundled/devtools-frontend/front_end/core/protocol_client/protocol_client.js (1)
+5월 04, 2023 11:07:23.210 [8656:3392:0504/110723.209:ERROR:CONSOLE(1)] "Request Network.clearAcceptedEncodingsOverride failed. {"code":-32601,"message":"'Network.clearAcceptedEncodingsOverride' wasn't found"}", source: devtools://devtools/bundled/devtools-frontend/front_end/core/protocol_client/protocol_client.js (1)
+5월 04, 2023 11:08:40.383 [8656:9296:0504/110840.383:ERROR:mcs_client.cc(750)] Received close command, resetting connection.
+5월 04, 2023 12:06:27.809 [8656:9296:0504/120627.809:ERROR:mcs_client.cc(750)] Received close command, resetting connection.

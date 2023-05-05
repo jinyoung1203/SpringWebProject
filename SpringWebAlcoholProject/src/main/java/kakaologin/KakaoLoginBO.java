@@ -28,7 +28,7 @@ import java.util.UUID;
 
 public class KakaoLoginBO {
     // 카카오 로그인 정보
-    private final static String KAKAO_CLIENT_ID = "3951fe07922dbdbd33f02177d181a7ba";
+    private final static String KAKAO_CLIENT_ID = "53adf38e6cd2f79c7a5826586aa96ed8";
     // private final static String KAKAO_CLIENT_SECRET = "a2HkDXc8LoDCXMq2rg3foyLhmWKSP3Wv";
     private final static String KAKAO_REDIRECT_URI = "http://localhost:9090/kakaoCallback.do";
     private final static String SESSION_STATE = "oauth_state_kakao";
@@ -139,7 +139,7 @@ public class KakaoLoginBO {
         return response.getBody();
     } // end of getUserProfile()
 
-    /*public Map<String, Object> getUserInfo(String access_token) throws IOException {
+    public Map<String, Object> getUserInfo(String access_token) throws IOException {
         System.out.println("------ getUserInfo ------");
         String host = "https://kapi.kakao.com/v2/user/me";
         Map<String, Object> result = new HashMap<String, Object>();
@@ -149,7 +149,7 @@ public class KakaoLoginBO {
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Authorization", "Bearer " + access_token);
             System.out.println("Authorization : " + urlConnection.getRequestProperty("Authorization"));
-            urlConnection.setRequestMethod("GET");
+            urlConnection.setRequestMethod("POST");
 
             int responseCode = urlConnection.getResponseCode();
             System.out.println("responseCode = " + responseCode);
@@ -189,7 +189,7 @@ public class KakaoLoginBO {
         }
 
         return result;
-    } // end of getUserInfo*/
+    } // end of getUserInfo
 
     private String generateRandomString() {
         return UUID.randomUUID().toString();

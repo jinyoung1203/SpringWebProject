@@ -63,6 +63,10 @@
                                                     <input type="text" name="user1_email" class="form-control" id="user1_email"
                                                            value="${email}" readonly required>
                                                 </c:when>
+                                                <c:when test="${userInfo ne null and userInfo.has_email eq true}">
+                                                    <input type="text" name="user1_email" class="form-control" id="user1_email"
+                                                           value="${userInfo.email}" readonly required>
+                                                </c:when>
                                                 <c:otherwise>
                                                     <input type="text" name="user1_email" class="form-control" id="user1_email"
                                                            onchange="idChange();" required>

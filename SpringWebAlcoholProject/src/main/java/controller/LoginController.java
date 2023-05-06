@@ -362,4 +362,21 @@ public class LoginController {
         return Common.Main.VIEW_PATH + "main.jsp";
     } // end of registerModify()
 
+    @ResponseBody
+    @RequestMapping(value = "formValid.do", produces = "application/json;charset=UTF-8")
+    public String formValid(@RequestParam String isCheck){
+        System.out.println("===== formValid.do =====");
+        String result = "";
+        System.out.println("isCheck : " + isCheck);
+
+        if(isCheck.equals("1")){
+            result = "1";
+        } else if(isCheck.equals("2")){
+            result = "2";
+        }
+
+        System.out.println("result : " + result);
+        return result;
+    } // end of formValid()
+
 } // end of class

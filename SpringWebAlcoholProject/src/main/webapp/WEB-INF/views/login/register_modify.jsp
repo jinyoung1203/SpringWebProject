@@ -48,7 +48,7 @@
                                     <p class="text-center small">Enter your personal details to modify account</p>
                                 </div>
 
-                                <form class="row g-3 needs-validation" id="register_form" novalidate>
+                                <form class="row g-3 needs-validation" id="register_modify_form" onsubmit="return false;" novalidate>
                                     <div class="col-12">
                                         <label for="user1_email" class="form-label">Email</label>
                                         <input type="text" name="user1_email" class="form-control"

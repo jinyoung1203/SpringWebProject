@@ -115,7 +115,31 @@
                         <ul class="dropdown-menu dropdown-menu-arrow profile">
                             <li>
                                 <a class="dropdown-item" href="#">
-                                    <span>My Profile</span>
+                                    <span>구매 목록</span>
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <span>취소/환불 목록</span>
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <span>장바구니 목록</span>
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="user_reviewList.do">
+                                    <span>리뷰 목록</span>
                                 </a>
                             </li>
                             <li>
@@ -123,18 +147,9 @@
                             </li>
                             <li>
                                 <a class="dropdown-item" href="my_information_modify.do">
-                                    <span>My Information Modify</span>
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
                                     <span>Account Settings</span>
                                 </a>
                             </li>
-                            <li>
                                 <hr class="dropdown-divider">
                             </li>
                             <li>

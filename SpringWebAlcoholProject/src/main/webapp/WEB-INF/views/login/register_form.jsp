@@ -21,7 +21,7 @@
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
     <!-- Template Main CSS File -->
-    <link href="${pageContext.request.contextPath}/resources/assets/css/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/login_css/niceAdmin.css" rel="stylesheet">
 </head>
 <body>
 <main>
@@ -35,7 +35,7 @@
                         <div class="d-flex justify-content-center py-4">
                             <a href="main.do" class="logo d-flex align-items-center w-auto">
                                 <img src="${pageContext.request.contextPath}/resources/upload/logo.jpg" alt="">
-                                <span class="d-none d-lg-block">홈페이지 이름</span>
+                                <span class="d-none d-lg-block">주당들</span>
                             </a>
                         </div><!-- End Logo -->
 
@@ -48,7 +48,7 @@
                                     <p class="text-center small">Enter your personal essential to create account</p>
                                 </div>
 
-                                <form class="row g-3 needs-validation" id="register_form" novalidate>
+                                <form class="row g-3 needs-validation" id="register_form" onsubmit="return false;" novalidate>
                                     <div class="col-12">
                                         <label for="user1_email" class="form-label">ID(e-mail)</label>
                                         <div class="input-group has-validation">
@@ -74,7 +74,7 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">아이디 중복 검사</h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
@@ -152,7 +152,7 @@
                                     </div>
                                     <div class="col-12">
                                         <button type="submit" class="btn btn-primary w-100" id="submit"
-                                        onclick="send(this.form);">Create Account</button>
+                                        onclick="send1(this.form);">Create Account</button>
                                     </div>
                                     <div class="col-12">
                                         <p class="small mb-0">Already have an account? <a href="login.do">Log in</a></p>
@@ -161,6 +161,7 @@
 
                             </div>
                         </div>
+
 
                         <div class="credits">
                             Designed by <a href="#">GoodCheese92 &amp BootstrapMade</a>

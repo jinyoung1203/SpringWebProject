@@ -97,7 +97,7 @@
                             <p class="fw-bold fs-4 text-black-50 fst-italic">
                                 ${vo1.product_detail_content1}
                             </p>
-                        </div><!-- End post content -->
+                        </div>
                         <div class="d-flex justify-content-center border border-primary">
                             <img class="img-fluid"
                                  src="${pageContext.request.contextPath}/resources/alcohol_image/${vo1.product_filename2}">
@@ -107,7 +107,7 @@
                             <p class="fw-bold fs-4 text-black-50 fst-italic">
                                 ${vo1.product_detail_content2}
                             </p>
-                        </div><!-- End post content -->
+                        </div>
                         <div class="d-flex justify-content-center border border-primary">
                             <div>
                                 <h2 class="fw-bold text-primary">어울리는 안주</h2>
@@ -117,6 +117,9 @@
                             <div>
                                 <p class="fs-5 fst-italic">${vo1.product_point_snack}</p>
                             </div>
+                        </div>
+                        <div class="border border-primary">
+                            <jsp:include page="product_review.jsp?review_list=${review_list}"></jsp:include>
                         </div>
 
                     </article><!-- End blog post -->

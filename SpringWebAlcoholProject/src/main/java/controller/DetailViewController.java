@@ -10,6 +10,7 @@ import vo.FullViewVO;
 import vo.ReviewLsjVO;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class DetailViewController {
@@ -27,13 +28,14 @@ public class DetailViewController {
         System.out.println("vo.getProduct_idx() : " + vo.getProduct_idx());
         FullViewVO vo1 = detailService.selectOne(vo.getProduct_idx());
         List<ReviewLsjVO> review_list = detailService.review_selectList(vo.getProduct_idx());
+        Map<String, Object> review_map = detailService.review_selectList2(vo.getProduct_idx());
         System.out.println("vo1 : " + vo1);
         System.out.println("review_list : " + review_list);
-        
-
+        System.out.println("review_map : " + review_map);
 
         model.addAttribute("vo1", vo1);
         model.addAttribute("review_list", review_list);
+        model.addAttribute("review_map", review_map);
 
         return Common.Detail_view.VIEW_PATH + "product_detail_view.jsp";
     } // end of detailview()

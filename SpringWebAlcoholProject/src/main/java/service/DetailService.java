@@ -8,6 +8,7 @@ import vo.FullViewVO;
 import vo.ReviewLsjVO;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DetailService {
@@ -27,5 +28,10 @@ public class DetailService {
         List<ReviewLsjVO> reviewList = detailViewDAO.review_selectList(product_idx);
         return reviewList;
     } // end of review_selectList()
+
+    public Map<String, Object> review_selectList2(int product_idx){
+        Map<String, Object> review_map = detailViewDAO.review_selectList2(product_idx);
+        return review_map;
+    } // end of review_selectList2()
 
 } // end of class

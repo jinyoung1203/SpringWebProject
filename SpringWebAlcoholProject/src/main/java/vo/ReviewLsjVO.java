@@ -1,8 +1,19 @@
 package vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class ReviewLsjVO {
     private int review_idx, review_rating, user1_idx, product_idx;
     private String review_content, review_filename, review_regdate;
+    private MultipartFile review_photo;
+
+    public MultipartFile getReview_photo() {
+        return review_photo;
+    }
+
+    public void setReview_photo(MultipartFile review_photo) {
+        this.review_photo = review_photo;
+    }
 
     public int getReview_idx() {
         return review_idx;

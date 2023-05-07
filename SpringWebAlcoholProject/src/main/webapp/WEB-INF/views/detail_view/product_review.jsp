@@ -25,20 +25,21 @@
 <body>
 <%--<jsp:include page="product_review.jsp"></jsp:include>--%>
 
-<c:forEach var="review_list" items="${review_list}" varStatus="status">
+<c:forEach var="review_list" items="${review_map.reviewList}" varStatus="status">
+    <c:set var="index" value="${status.index}"></c:set>
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
                     <div>
-                        <span class="text-start">${review_list.user1_idx}</span>
+                        <span class="text-start">${review_map.userList[index].user1_nickname}</span>
                         <span class="text-end">${review_list.review_rating}</span>
                         <span class="text-end">${review_list.review_regdate}</span>
                     </div>
                 </div>
                 <div class="card-body">
                     <p>${review_list.review_content}, ${review_list.review_filename}</p>
-                    <img class="img-fluid rounded float-start"
+                    <img class="img-fluid rounded float-start w-25 h-auto"
                          src="${pageContext.request.contextPath}/resources/alcohol_image/${review_list.review_filename}"/>
                 </div>
             </div>

@@ -5,8 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import vo.FullViewVO;
 import vo.ReviewLsjVO;
+import vo.UserVO;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class DetailViewDAO {
@@ -27,5 +30,16 @@ public class DetailViewDAO {
         List<ReviewLsjVO> reviewList = sqlSession.selectList("p.review_selectList", product_idx);
         return reviewList;
     } // end of review_selectList()
+
+    public Map<String, Object> review_selectList2(int prodcut_idx){
+        List<ReviewLsjVO> reviewList = sqlSession.selectList("r.review_selectList2", prodcut_idx);
+        List<UserVO> userList = sqlSession.selectList("r.review_selectList3", prodcut_idx);
+
+        Map<String, Object> review_map = new HashMap<String, Object>();
+        review_map.put("reviewList", reviewList);
+        review_map.put("userList", userList);
+
+        return review_map;
+    }
 
 } // end of class

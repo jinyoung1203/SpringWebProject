@@ -114,7 +114,7 @@
 
                         <ul class="dropdown-menu dropdown-menu-arrow profile">
                             <li>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="purchaseItemList.do">
                                     <span>구매 목록</span>
                                 </a>
                             </li>

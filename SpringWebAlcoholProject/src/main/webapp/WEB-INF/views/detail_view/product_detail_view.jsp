@@ -42,17 +42,15 @@
             </div>
             <div class="row">
                 <div class="col-9">
-
-                    <article class="blog-details">
-
-                        <div class="post-img border border-primary">
-                            <div class="row gx-4 gx-lg-5 align-items-center">
-                                <div class="col-6 text-center border border-primary">
-                                    <img src="${pageContext.request.contextPath}/resources/alcohol_image/${vo1.product_thumbnail_filename}"
-                                         alt="" class="img-fluid">
-                                </div>
-                                <div class="col-6">
-                                    <h1 class="display-5 fw-bolder text-primary">${vo1.product_name}</h1>
+                    <div class="card mb-3 border border-1 ">
+                        <div class="row g-0">
+                            <div class="col-5 text-center border border-primary">
+                                <img src="${pageContext.request.contextPath}/resources/alcohol_image/${vo1.product_thumbnail_filename}"
+                                     alt="" class="w-75 h-100" />
+                            </div>
+                            <div class="col-7">
+                                <div class="card-body">
+                                    <h1 class="card-title fw-bolder text-primary">${vo1.product_name}</h1>
                                     <p class="lead fst-italic fw-bold text-warning">${vo1.product_simple_content}</p>
                                     <div class="d-flex">
                                         <span class="fw-bold fst-italic ">주종 : ${vo1.product_type}</span>
@@ -68,8 +66,8 @@
                                     </div>
                                     <div class="fs-6 mb-5">
                                         <span class="fw-bold">판매가격 : <br></span>
-                                        <h4 class="fw-bold">&nbsp;&nbsp;<fmt:formatNumber value="${vo1.product_price}"
-                                                                                          pattern="#,###"/>원</h4>
+                                        <h4 class="fw-bold fs-2"><fmt:formatNumber value="${vo1.product_price}"
+                                                                                   pattern="#,###"/>원</h4>
                                     </div>
                                     <div class="d-flex">
                                         <span class="fst-italic">유통기한 : ${vo1.product_expiration_date}</span>
@@ -77,7 +75,9 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
 
+                    <article class="blog-details">
                         <div class="d-flex justify-content-center border border-primary">
                             <div class="col-10">
                                 <jsp:include
@@ -119,7 +119,8 @@
                             </div>
                         </div>
                         <div class="border border-primary">
-                            <jsp:include page="product_review.jsp?review_list=${review_list}"></jsp:include>
+                            <jsp:include
+                                    page="product_review.jsp?review_list=${review_list}&review_map=${review_map}"></jsp:include>
                         </div>
 
                     </article><!-- End blog post -->

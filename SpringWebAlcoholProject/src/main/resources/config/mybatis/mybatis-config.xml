@@ -12,6 +12,7 @@
 		<!-- <typeAlias type="vo.UserVO" alias="user"/> -->
 		<typeAlias type="vo.FullViewVO" alias="product"/>
 		<typeAlias type="vo.ProducerVO" alias="producer"/>		
+		<typeAlias type="vo.SearchVO" alias="search"/>
 	</typeAliases>
 	
 	<mappers>

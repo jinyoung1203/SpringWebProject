@@ -68,6 +68,8 @@
 <!-- ======= Header ======= -->
 <jsp:include page="../main/header.jsp"></jsp:include>
 
+<div class="row"><br><br><br></div>
+
 <main id="main" class="main">
     <section id="blog" class="blog">
         <div class="container" data-aos="fade-up">

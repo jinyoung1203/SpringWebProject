@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="b">
+	<select id="board_list1" resultType="vo.BoardVO">
+		select b.*, u.user1_name from board1 b inner join user1 u on b.user1_idx = u.user1_idx
+	</select>
+
+	<select id="board_list2" resultType="vo.UserVO">
+		select b.*, u.user1_name from board1 b inner join user1 u on b.user1_idx = u.user1_idx
+	</select>
+
+	<select id="board_page_select" parameterType="java.util.HashMap">
+		select * from ( select RANK() OVER(order by REF desc, step) no, b.* from board1 b) where no between #{ start } AND #{ end }
+	</select>
+
+	<select id="board_count" parameterType="java.util.HashMap" resultType="int">
+		select count(*) from board1
+	</select>
+
+	<insert id="board_insert" parameterType="vo.BoardVO">
+		insert into board1 values (
+		                          seq_board1_idx.nextVal,
+		                          #{board_content},
+		                          #{board_subject},
+		                          sysdate,
+		                          #{board_readhit},
+		                          #{board_ref},
+		                          #{board_step},
+		                          #{board_depth},
+		                          #{user1_idx},
+		                          #{board_filename}
+								 )
+	</insert>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

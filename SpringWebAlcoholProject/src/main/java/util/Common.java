@@ -28,5 +28,9 @@ public class Common {
 	public static class Temporary_view{
 		public static final String VIEW_PATH = "/WEB-INF/views/Temporary/";
 	}
+	
+	public static class Review{
+		public static final String VIEW_PATH = "/WEB-INF/views/review/";
+	}
 
 } // end of class

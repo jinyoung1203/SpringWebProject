@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import dao.BuyDAO;
@@ -61,5 +62,31 @@ public class BuyController implements Buy {
 		model.addAttribute("cart_in", cart_in);
 
 		return CART_IN;
+	}
+	
+	@RequestMapping("/remove_cart_in.do")
+	@ResponseBody
+	public void Remove_Cart_In(int idx, Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		List<OrderListVO> cart = (List<OrderListVO>) (session.getAttribute("cart"));
+		System.out.println("삭제전 : " + cart.size());
+		for (OrderListVO item : cart) {
+			if (item.getProduct_idx() == idx) {
+				cart.remove(item);
+				System.out.println("삭제후 : " + cart.size());
+				break;
+			}
+		}
+		session.setAttribute("cart", cart);
+		List<FullViewVO> cart_in=new ArrayList<FullViewVO>();
+		if (cart.size() != 0) {
+			cart_in = buydao.selectProducts(cart);
+		}
+		model.addAttribute("cart_in", cart_in);
+	}
+	@RequestMapping(value = "/findProdcerName.do", produces = "application/text; charset=UTF-8;")
+	@ResponseBody
+	public String findProdcerName(int idx) {
+		return buydao.selectProducerName(idx).getProducer_name();
 	}
 }

@@ -15,6 +15,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{orderlist.product_idx}
 		</foreach>
 	</select>
+	<select id="select_producer_name" parameterType="int" resultType="producer">
+		select * from Producer where producer_idx=#{idx}
+	</select>
 </mapper>
 
 

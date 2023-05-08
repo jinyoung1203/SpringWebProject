@@ -21,4 +21,12 @@ public class Common {
 		public static final String VIEW_PATH = "/WEB-INF/views/detail_view/";
 	}
 
+	public static class Review_view2{
+		public static final String VIEW_PATH = "/WEB-INF/views/review_test/";
+	}
+
+	public static class Temporary_view{
+		public static final String VIEW_PATH = "/WEB-INF/views/Temporary/";
+	}
+
 } // end of class

@@ -642,6 +642,22 @@ progress {
   margin-left: auto;
 }
 
+.container{
+	margin-top:30px;
+	
+}
+
+
+
+.masthead-subheading{
+	padding-top:70px;
+	padding-bottom:20px;
+}
+
+.masthead-heading{
+	padding-bottom:50px;
+}
+
 @media (min-width: 576px) {
   .container-sm, .container {
     max-width: 540px;
@@ -8093,7 +8109,7 @@ textarea.form-control-lg {
 
 .text-black {
   --bs-text-opacity: 1;
-  color: rgba(var(--bs-black-rgb), var(--bs-text-opacity)) !important;
+  color: white;
 }
 
 .text-white {
@@ -10883,6 +10899,10 @@ p {
   font-weight: 700;
 }
 
+.btn-span{
+	text-shadow: 3px 2px 3px gray;
+}
+
 .btn-social {
   height: 2.5rem;
   width: 2.5rem;
@@ -10961,12 +10981,15 @@ p {
   }
 }
 header.masthead {
-  height : 900px;
+  height : 1100px;
   padding-top: 10.5rem;
   padding-bottom: 6rem;
   text-align: center;
   color: #fff;
-  background-image: url("../webapp/resources/startbootstrap-agency-gh-pages/assets/img/alcohol.jpg");
+  /* 이클립스 */
+  /* background-image: url("/alcohol/resources/startbootstrap-agency-gh-pages/assets/img/alcohol.jpg"); */
+  /* 인텔리제이 */
+  background-image: url("../../startbootstrap-agency-gh-pages/assets/img/alcohol.jpg");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -11328,9 +11351,117 @@ section#contact form#contactForm :-ms-input-placeholder {
   color: #ced4da;
 }
 
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
 .footer {
-  margin-top: 70px;
+  font-size: 14px;
+  background-color: #008374;
+  padding: 50px 0;
+  color: white;
+}
+
+.footer .footer-info .logo {
+  line-height: 0;
+  margin-bottom: 25px;
+}
+
+.footer .footer-info .logo img {
+  max-height: 40px;
+  margin-right: 6px;
+}
+
+.footer .footer-info .logo span {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff;
+  font-family: var(--font-primary);
+}
+
+.footer .footer-info p {
+  font-size: 14px;
+  font-family: var(--font-primary);
+}
+
+.footer .social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-right: 10px;
+  transition: 0.3s;
+}
+
+.footer .social-links a:hover {
+  color: #fff;
+  border-color: #fff;
+}
+
+.footer h4 {
+  font-size: 16px;
+  font-weight: bold;
+  position: relative;
+  padding-bottom: 12px;
+}
+
+.footer .footer-links {
+  margin-bottom: 30px;
+}
+
+.footer .footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer .footer-links ul i {
+  padding-right: 2px;
+  color: rgba(0, 131, 116, 0.8);
+  font-size: 12px;
+  line-height: 0;
+}
+
+.footer .footer-links ul li {
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+.footer .footer-links ul li:first-child {
+  padding-top: 0;
+}
+
+.footer .footer-links ul a {
+  color: rgba(255, 255, 255, 0.7);
+  transition: 0.3s;
+  display: inline-block;
+  line-height: 1;
+}
+
+.footer .footer-links ul a:hover {
+  color: #fff;
+}
+
+.footer .footer-contact p {
+  line-height: 26px;
+}
+
+.footer .copyright {
   text-align: center;
-  font-size: 0.9rem;
-  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.footer .credits {
+  padding-top: 4px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.footer .credits a {
+  color: #fff;
 }

@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import util.Buy;
 import util.Common;
 
 import javax.servlet.http.HttpSession;
@@ -21,5 +23,12 @@ public class MainController {
     public String main() {
         return Common.Main.VIEW_PATH + "main.jsp";
     } // end of main()
+    
+    @RequestMapping("/buy.do")
+    public String buy() {
+    	return Buy.BUY;
+    }
+
+
 
 } // end of class

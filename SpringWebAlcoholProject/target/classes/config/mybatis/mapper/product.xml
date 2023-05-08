@@ -15,6 +15,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="product_selectOne" parameterType="java.lang.Integer" resultType="vo.FullViewVO">
 		select * from product where product_idx = #{product_idx}
 	</select>
+
+	<select id="review_selectList" parameterType="int" resultType="vo.ReviewLsjVO">
+		select * from review where product_idx = #{product_idx} order by review_regdate desc
+	</select>
 	
 </mapper>
 

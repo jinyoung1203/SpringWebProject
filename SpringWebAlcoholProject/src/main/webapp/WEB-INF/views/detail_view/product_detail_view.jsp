@@ -33,8 +33,8 @@
           crossorigin="anonymous">
 
     <%-- DetailView CSS Files--%>
-    <link href="${pageContext.request.contextPath}/resources/css/detailview_css/main.css?ver=1"
-          rel="stylesheet">
+    <%--<link href="${pageContext.request.contextPath}/resources/css/detailview_css/main.css?ver=1"
+          rel="stylesheet">--%>
     <link href="${pageContext.request.contextPath}/resources/css/detailview_css/detail.css?ver=1"
           rel="stylesheet">
 </head>
@@ -92,8 +92,7 @@
                                         <div class="starpoint_wrap">
                                             <div class="starpoint_box">
                                                 <c:forEach var="i" begin="1" end="10">
-                                                    <label for="starpoint_${i / 2.0}" class="label_star"
-                                                           title="${i / 2.0}"> <span
+                                                    <label for="starpoint_${i / 2.0}" class="label_star" title="${i / 2.0}"> <span
                                                             class="blind">${i/2.0}점</span>
                                                     </label>
                                                     <input type="radio" id="starpoint_${i / 2.0}" class="star_radio">
@@ -115,7 +114,7 @@
                                     <div class="d-flex"></div>
                                     <div class="fs-5 mb-5 sell" style="margin-bottom: 10px;">
                                         판매가격 : <span class="price"><fmt:formatNumber value="${vo1.product_price}"
-                                                                                     pattern="#,###"/>원</span>
+                                                                                     pattern="#,###" />원</span>
                                     </div>
                                     <div class="d-flex expi">
 											<span>유통기한 : <c:if test="${empty vo1.product_expiration_date }">
@@ -143,32 +142,28 @@
                                 <span class="gs">단 맛 : </span>
                                 <div class="progress " role="progressbar" aria-label="Basic example" aria-valuenow="100"
                                      aria-valuemin="0" aria-valuemax="100">
-                                    <div class="progress-bar"
-                                         style="width: ${vo1.product_sweet_rating * 10}%">${vo1.product_sweet_rating}</div>
+                                    <div class="progress-bar" style="width: ${vo1.product_sweet_rating * 10}%">${vo1.product_sweet_rating}</div>
                                 </div>
                             </div>
                             <div class="g">
                                 <span class="gs">신 맛 : </span>
                                 <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="100"
                                      aria-valuemin="0" aria-valuemax="100">
-                                    <div class="progress-bar"
-                                         style="width: ${vo1.product_sourish_rating * 10}%">${vo1.product_sourish_rating}</div>
+                                    <div class="progress-bar" style="width: ${vo1.product_sourish_rating * 10}%">${vo1.product_sourish_rating}</div>
                                 </div>
                             </div>
                             <div class="g">
                                 <span class="gs">깰꼼함 : </span>
                                 <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="100"
                                      aria-valuemin="0" aria-valuemax="100">
-                                    <div class="progress-bar"
-                                         style="width: ${vo1.product_cleantaste_rating * 10}%">${vo1.product_cleantaste_rating}</div>
+                                    <div class="progress-bar" style="width: ${vo1.product_cleantaste_rating * 10}%">${vo1.product_cleantaste_rating}</div>
                                 </div>
                             </div>
                             <div class="g">
                                 <span class="gs">바디감 : </span>
                                 <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="100"
                                      aria-valuemin="0" aria-valuemax="100">
-                                    <div class="progress-bar"
-                                         style="width: ${vo1.product_bodytaste_rating * 10}%">${vo1.product_bodytaste_rating}</div>
+                                    <div class="progress-bar" style="width: ${vo1.product_bodytaste_rating * 10}%">${vo1.product_bodytaste_rating}</div>
                                 </div>
                             </div>
                         </div>
@@ -268,39 +263,6 @@
         <!-- End Blog Details Section -->
     </section>
 
-    <div class="d-flex justify-content-center border border-primary">
-        <h1 class="fw-bold text-primary">[${vo1.product_name}]</h1>
-    </div>
-    <div class="d-flex justify-content-center border border-primary">
-        <img class="img-fluid"
-             src="${pageContext.request.contextPath}/resources/alcohol_image/${vo1.product_filename1}">
-    </div>
-    <div class="content border border-primary">
-        <h2 class="fw-bold text-primary">[${vo1.product_name}] - 1</h2>
-        <p class="fw-bold fs-4 text-black-50 fst-italic">
-            ${vo1.product_detail_content1}
-        </p>
-    </div>
-    <div class="d-flex justify-content-center border border-primary">
-        <img class="img-fluid"
-             src="${pageContext.request.contextPath}/resources/alcohol_image/${vo1.product_filename2}">
-    </div>
-    <div class="content border border-primary">
-        <h2 class="fw-bold text-primary">[${vo1.product_name}] - 2</h2>
-        <p class="fw-bold fs-4 text-black-50 fst-italic">
-            ${vo1.product_detail_content2}
-        </p>
-    </div>
-    <div class="d-flex justify-content-center border border-primary">
-        <div>
-            <h2 class="fw-bold text-primary">어울리는 안주</h2>
-        </div>
-    </div>
-    <div class="d-flex justify-content-center border border-primary">
-        <div>
-            <p class="fs-5 fst-italic">${vo1.product_point_snack}</p>
-        </div>
-    </div>
     <div class="border border-primary">
         <jsp:include
                 page="product_review.jsp?review_list=${review_list}&review_map=${review_map}"></jsp:include>
@@ -311,11 +273,6 @@
 
 <!-- ======= Footer ======= -->
 <jsp:include page="../main/footer.jsp"></jsp:include>
-
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center">
-    <i class="bi bi-arrow-up-short"></i>
-</a>
-
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 

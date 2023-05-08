@@ -21,7 +21,7 @@ public class ReviewLsjDAO {
     } // end of constructor
 
     public int review_insert(ReviewLsjVO review_vo){
-        int res = sqlSession.insert("r.review_insert", review_vo);
+        int res = sqlSession.insert("r2.review_insert", review_vo);
         return res;
     } // end of review_insert()
 

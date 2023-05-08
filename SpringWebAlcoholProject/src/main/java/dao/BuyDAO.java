@@ -22,7 +22,7 @@ public class BuyDAO {
 		
 		return session.selectList("b.select_products",cart);
 	}
-	public ProducerVO selectProducerName(int idx) {
+	public ProducerVO selectProducer(int idx) {
 		return session.selectOne("b.select_producer_name",idx);
 	}
 }

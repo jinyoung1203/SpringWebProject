@@ -13,6 +13,8 @@
 		<typeAlias type="vo.FullViewVO" alias="product"/>
 		<typeAlias type="vo.ProducerVO" alias="producer"/>		
 		<typeAlias type="vo.SearchVO" alias="search"/>
+		<typeAlias type="vo.OrderListVO" alias="orderlist"/>
+
 	</typeAliases>
 	
 	<mappers>

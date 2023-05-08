@@ -11,14 +11,15 @@
 	<typeAliases>
 		<!-- <typeAlias type="vo.UserVO" alias="user"/> -->
 		<typeAlias type="vo.FullViewVO" alias="product"/>
-		
+		<typeAlias type="vo.ProducerVO" alias="producer"/>		
+		<typeAlias type="vo.SearchVO" alias="search"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="config/mybatis/mapper/user.xml" />
 		<mapper resource="config/mybatis/mapper/product.xml" />
-		<!-- <mapper resource="config/mybatis/mapper/board_insert.xml" />
-		<mapper resource="config/mybatis/mapper/board_update.xml" />
+		<mapper resource="config/mybatis/mapper/buy.xml" />
+		<!-- <mapper resource="config/mybatis/mapper/board_update.xml" />
 		<mapper resource="config/mybatis/mapper/board_delete.xml" /> -->
 	</mappers>
 </configuration>

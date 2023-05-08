@@ -1,4 +1,0 @@
-INDEX VERSION 1.4+C:\embedded_yh\embedded_yh_jsp_spring\work2\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-1332275748.index
-3992302981.index
-2522193038.index

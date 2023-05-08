@@ -18,8 +18,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 	
-	<select id="review_selectOne" resultType="vo.ReviewVO" parameterType="int">
+	<select id="review_selectOne" resultType="vo.ReviewVO" parameterType="java.lang.Integer">
 		select * from review where user1_idx = #{user1_idx}	
+	</select>
+	
+	<select id="avg" resultType="double" parameterType="java.lang.Integer">
+		SELECT AVG(review_rating) FROM review WHERE product_idx = #{product_idx}
 	</select>
 	
 </mapper>

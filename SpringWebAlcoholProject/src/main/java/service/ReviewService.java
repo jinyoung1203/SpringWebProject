@@ -29,10 +29,17 @@ public class ReviewService {
 		int res = reviewDao.insert(vo);
 		return res;
 	}// end of insert_review
-	
+
 	public ReviewVO selectOne(int user1_idx) {
 		ReviewVO vo = reviewDao.selectOne(user1_idx);
 		return vo;
+	}
+
+	public double avg(int product_idx) {
+		
+		double res = reviewDao.avg(product_idx);
+		
+		return res;
 	}
 
 }

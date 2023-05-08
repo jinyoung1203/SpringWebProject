@@ -104,15 +104,6 @@
 	overflow: hidden;
 }
 
-
-
-
-
-
-
-
-
-
 </style>
 <script>
 	function rating(rating) {

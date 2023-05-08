@@ -28,14 +28,23 @@ public class ReviewDAO {
 		int res = sqlSession.insert("r.review_insert", vo);
 		return res;
 	}// end of insert
-	
-	public ReviewVO selectOne( int user1_idx ) {
+
+	public ReviewVO selectOne(int user1_idx) {
 		System.out.println("----- ReviewDAO -----");
 		System.out.println("user1_idx : " + user1_idx);
 		ReviewVO vo = sqlSession.selectOne("r.review_selectOne", user1_idx);
 		System.out.println("vo : " + vo);
 		return vo;
 	}
-	
-	
+
+	public double avg(int product_idx) {
+
+		double res = 0.0;
+		if (sqlSession.selectOne("r.avg", product_idx) == null) {
+			return res;
+		}
+		res = sqlSession.selectOne("r.avg", product_idx);
+		return res;
+	}
+
 }

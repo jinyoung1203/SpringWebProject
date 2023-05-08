@@ -89,7 +89,6 @@
                 <li><a href="#">구독</a></li>
                 <li><a href="#">Contact</a></li>
 
-
                 <c:if test="${user1 eq null}">
                     <li>
                         <a href="login.do">

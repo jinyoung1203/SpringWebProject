@@ -43,40 +43,43 @@
         <div class="row">
             <div class="col-1"></div>
             <div class="col-10">
-            <table class="table table-bordered border-success caption-top">
-                <caption class="fs-2 fw-bold text-success">List of board</caption>
-                <thead class="table-primary border border-primary">
-                <tr class="text-center">
-                    <th style="width:10%;">ID</th>
-                    <th style="width:45%;">제목</th>
-                    <th style="width:15%;">작성자</th>
-                    <th style="width:20%;">작성일</th>
-                    <th style="width:10%;">조회</th>
-                </tr>
-                </thead>
-                <tbody class="text-center">
-                <c:forEach var="board_list" items="${board_map.board_list}" varStatus="status">
-                    <c:set var="index" value="${status.index}"></c:set>
-                    <tr>
-                        <td>${board_list.board1_idx}</td>
-                        <td><a href="#" class="text-dark">${board_list.board1_subject}</a></td>
-                        <td>${board_map.user_list[index].user1_name}</td>
-                        <td>${board_list.board1_regdate}</td>
-                        <td>${board_list.board1_readhit}</td>
+                <table class="table table-bordered border-success caption-top">
+                    <caption class="fs-2 fw-bold text-success">List of board</caption>
+                    <thead class="table-primary border border-primary">
+                    <tr class="text-center">
+                        <th style="width:10%;">No</th>
+                        <th style="width:45%;">제목</th>
+                        <th style="width:15%;">작성자</th>
+                        <th style="width:20%;">작성일</th>
+                        <th style="width:10%;">조회</th>
                     </tr>
-                </c:forEach>
-                <tr>
-                    <td colspan="5" class="text-center">${pageMenu}</td>
-                </tr>
-                </tbody>
-                <tfoot>
+                    </thead>
+                    <tbody class="text-center">
+                    <c:forEach var="board_list" items="${board_map.board_list}" varStatus="status">
+                        <c:set var="index" value="${status.index}"></c:set>
+                        <tr>
+                            <td>${board_list.board1_idx}</td>
+                            <td><a href="board_detail_view.do?board1_idx=${board_list.board1_idx}&user1_idx=${board_map.user_list[index].user1_idx}">${board_list.board1_subject}</a></td>
+                            <td>${board_map.user_list[index].user1_name}</td>
+                            <td>${board_list.board1_regdate}</td>
+                            <td>${board_list.board1_readhit}</td>
+                        </tr>
+                    </c:forEach>
                     <tr>
-                        <td colspan="5" class="text-end">
-                            <input type="button" class="btn btn-primary" value="글쓰기" onclick="location.href='board_write.do'"/>
-                        </td>
+                        <td colspan="5" class="text-center">${pageMenu}</td>
                     </tr>
-                </tfoot>
-            </table>
+                    </tbody>
+                    <c:if test="${user1 ne null}">
+                        <tfoot>
+                        <tr>
+                            <td colspan="5" class="text-end">
+                                <input type="button" class="btn btn-primary" value="글쓰기"
+                                       onclick="location.href='board_write.do'"/>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </c:if>
+                </table>
             </div>
             <div class="col-1"></div>
         </div>
@@ -93,7 +96,6 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/resources/js/review_js/impactReview.js"></script>
-<%-- Summernote Editor JS file --%>
 
 </body>
 </html>

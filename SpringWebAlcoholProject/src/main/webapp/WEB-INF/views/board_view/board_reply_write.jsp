@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Board Write</title>
+    <title>Board Reply Write</title>
 
     <meta content="" name="description">
     <meta content="" name="keywords">
@@ -41,33 +41,36 @@
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-10">
-                    <div class="card">
-                        <div class="card-header">
-                            <span class="fs-2 fw-bold text-success bg-white">게시판 쓰기</span>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-title">
-                                <h4 class="fw-bold text-primary">게시글 제목</h4>
-                                <input type="text" class="form-control fw-bold" name="board1_subject">
+                    <form id="boardForm">
+                        <div class="card">
+                            <div class="card-header">
+                                <span class="fs-2 fw-bold text-success bg-white">댓글 쓰기</span>
                             </div>
-                            <div>
-                                <h4 class="fw-bold text-primary">게시글 내용</h4>
-                                <textarea id="summernote" class="summernote" name="board1_content">
+                            <div class="card-body">
+                                <div class="card-title">
+                                    <h4 class="fw-bold text-primary">게시글 제목</h4>
+                                    <input type="text" class="form-control fw-bold" name="board1_subject" value="${board_vo.board1_subject}" readonly>
+                                </div>
+                                <div>
+                                    <h4 class="fw-bold text-primary">댓글 내용</h4>
+                                    <textarea id="summernote" class="summernote" name="board1_content">
 
                                     </textarea><!-- End Summernote Editor -->
+                                </div>
+                                <input type="file" name="board1_photo" id="board1_photo">
                             </div>
-                            <input type="file" name="board1_photo" id="board1_photo">
+                            <div class="card-footer text-end">
+                                <button class="btn btn-primary" onclick="send(this.form);">등록하기</button>
+                                <button class="btn btn-secondary" onclick="location.href='board_detail_view.do?board1_idx=${board_vo.board1_idx}&user1_idx=${user_vo.user1_idx}'">취소</button>
+                            </div>
                         </div>
-                        <div class="card-footer text-end">
-                            <button class="btn btn-primary" onclick="send(this.form);">등록하기</button>
-                            <button class="btn btn-secondary" onclick="location.href='main.do'">취소</button>
-                        </div>
-                    </div>
-                    <input type="hidden" name="user1_idx" value="${user1.user1_idx}">
-                    <input type="hidden" name="board1_readhit" value="0">
-                    <input type="hidden" name="board1_ref" value="0">
-                    <input type="hidden" name="board1_step" value="0">
-                    <input type="hidden" name="board1_depth" value="0">
+                        <input type="hidden" name="board1_idx" value="${board_vo.board1_idx}">
+                        <input type="hidden" name="user1_idx" value="${user1.user1_idx}">
+                        <input type="hidden" name="board1_readhit" value="0">
+                        <input type="hidden" name="board1_ref" value="${board_vo.board1_idx}">
+                        <input type="hidden" name="board1_step" value="${board_vo.board1_step}">
+                        <input type="hidden" name="board1_depth" value="${board_vo.board1_depth}">
+                    </form>
                 </div>
                 <div class="col-1"></div>
             </div>
@@ -121,23 +124,17 @@
     });
 
     function send(f) {
-        let board_content = f.board1_content.value;
-        let board_photo = f.board1_photo.value;
-        let board_subject = f.board1_subject.value;
+        let board1_content = f.board1_content.value;
+        let board1_photo = f.board1_photo.value;
+        let board1_subject = f.board1_subject.value;
 
-        if (board_subject.trim() == '') {
-            alert("게시판 제목을 작성해주세요.");
-            return;
-        }
-
-
-        if (board_content.trim() == '') {
-            alert("게시판 내용을 작성해주세요.");
+        if (board1_content.trim() == '') {
+            alert("댓글 내용을 작성해주세요.");
             return;
         }
 
         f.method = "post";
-        f.action = "board_insert.do";
+        f.action = "board_reply_insert.do";
         f.submit();
     } // end of send()
 

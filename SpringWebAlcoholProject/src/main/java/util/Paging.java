@@ -39,50 +39,94 @@ public class Paging {
         sb = new StringBuffer();
 //-----그룹페이지처리 이전 --------------------------------------------------------------------------------------------
         if(isPrevPage){
-            sb.append("<a href ='"+pageURL+"?page=");
+            sb.append("<nav aria-label=\"Page navigation example\">\n" +
+                    "  <ul class=\"pagination\">\n" +
+                    "    <li class=\"page-item\">\n" +
+                    "      <a class=\"page-link\" href=\'" +pageURL+"?page=");
             //sb.append(nowPage - blockPage);
             sb.append( startPage-1 );
             sb.append("&"+searchParam);
-            sb.append("'>◀</a>");
+            sb.append("'\" aria-label=\"Previous\">\n" +
+                    "        <span aria-hidden=\"true\">&laquo;</span>\n" +
+                    "      </a>\n" +
+                    "    </li>");
         }
-        else
-            sb.append("◀");
+        else {
+            sb.append("<nav aria-label=\"Page navigation example\">\n" +
+                    "  <ul class=\"pagination justify-content-center\">\n" +
+                    "    <li class=\"page-item\">\n" +
+                    "      <a class=\"page-link\" href=\'" +pageURL+"?page=");
+            //sb.append(nowPage - blockPage);
+            sb.append( startPage );
+            sb.append("&"+searchParam);
+            sb.append("'\" aria-label=\"Previous\">\n" +
+                    "        <span aria-hidden=\"true\">&laquo;</span>\n" +
+                    "      </a>\n" +
+                    "    </li>");
+        }
 
 //------페이지 목록 출력 -------------------------------------------------------------------------------------------------
-        sb.append(" ");
         for(int i=startPage; i<= endPage ;i++){
             if(i>totalPage)break;
             if(i == nowPage){ //현재 있는 페이지
-                sb.append("&nbsp;<b><font color='#91b72f'>");
-                sb.append(i);
-                sb.append("</font></b>");
-            }
-            else{//현재 페이지가 아니면
-                sb.append("&nbsp;<a href='"+pageURL+"?page=");
+                sb.append("<li class=\"page-item\"><a class=\"page-link\" href='");
+                sb.append(pageURL+"?page=");
                 sb.append(i);
                 sb.append("&"+searchParam);
                 sb.append("'>");
                 sb.append(i);
                 sb.append("</a>");
+                sb.append("</li>");
+            }
+            else{//현재 페이지가 아니면
+                sb.append("<li class=\"page-item\"><a class=\"page-link\" href='");
+                sb.append(pageURL+"?page=");
+                sb.append(i);
+                sb.append("&"+searchParam);
+                sb.append("'>");
+                sb.append(i);
+                sb.append("</a>");
+                sb.append("</li>");
             }
         }// end for
 
-        sb.append("&nbsp; ");
+        // sb.append("&nbsp; ");
 
 //-----그룹페이지처리 다음 ----------------------------------------------------------------------------------------------
         if(isNextPage){
-            sb.append("<a href='"+pageURL+"?page=");
-
+            sb.append("<li class=\"page-item\">\n" +
+                    "      <a class=\"page-link\" href='");
+            sb.append(pageURL+"?page=");
             sb.append(endPage + 1);
 			/*if(nowPage+blockPage > totalPage)nowPage = totalPage;
 			else
 				nowPage = nowPage+blockPage;
 			sb.append(nowPage);*/
             sb.append("&"+searchParam);
-            sb.append("'>▶</a>");
+            sb.append("' aria-label=\"Next\">\n" +
+                    "        <span aria-hidden=\"true\">&raquo;</span>\n" +
+                    "      </a>\n" +
+                    "    </li>\n" +
+                    "  </ul>\n" +
+                    "</nav>");
         }
-        else
-            sb.append("▶");
+        else {
+            sb.append("<li class=\"page-item\">\n" +
+                    "      <a class=\"page-link\" href='");
+            sb.append(pageURL + "?page=");
+            sb.append(endPage);
+			/*if(nowPage+blockPage > totalPage)nowPage = totalPage;
+			else
+				nowPage = nowPage+blockPage;
+			sb.append(nowPage);*/
+            sb.append("&" + searchParam);
+            sb.append("' aria-label=\"Next\">\n" +
+                    "        <span aria-hidden=\"true\">&raquo;</span>\n" +
+                    "      </a>\n" +
+                    "    </li>\n" +
+                    "  </ul>\n" +
+                    "</nav>");
+        }
 //---------------------------------------------------------------------------------------------------------------------
 
         return sb.toString();

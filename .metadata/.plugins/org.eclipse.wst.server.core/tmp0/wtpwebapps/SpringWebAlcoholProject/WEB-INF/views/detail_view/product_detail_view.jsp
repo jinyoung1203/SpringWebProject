@@ -281,7 +281,7 @@ pageContext.setAttribute("LF", "\n");
 								</div>
 								<div class="shopping">
 									<button type="button" class="btn btn-primary number buy"
-										onclick="shopping('vo1.product_idx')">
+										onclick="buying(this.form)">
 										<i class='bx bx-gift'>구매하기</i>
 									</button>
 								</div>
@@ -340,9 +340,7 @@ pageContext.setAttribute("LF", "\n");
 	function resFn() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			price = parseInt(xhr.responseText);
-			console.log(price);
 			document.ff.price.value = price;
-			console.log(document.ff.price.value);
 			document.ff.totPrice.value = price + 3000;
 		}
 	}
@@ -351,23 +349,28 @@ pageContext.setAttribute("LF", "\n");
 	function cal(op) {
 		const f = document.ff;
 		var amount = parseInt(f.amount.value);
-		let totPrice = parseInt(f.totPrice.value);
 		
 		if (op == '+') {
-			f.amount.value = amount + 1;
-			totPrice += price;
+			f.amount.value = ++amount;
+			f.totPrice.value = amount*price+3000;
 		} else if (op == '-' && amount > 1) {
-			f.amount.value = amount - 1;
-			totPrice -= price;
+			f.amount.value = --amount;
+			f.totPrice.value = amount*price+3000;
 		}
 		document.getElementById("amount").innerHTML=amount;
-		f.totPrice.value = totPrice;
 	}
 	function cart(f) {
 		f.action = "cartAdd.do";
 		f.price.value = f.totPrice.value;
 		f.submit();
 
+	}
+	function buying(f){
+		f.method="POST";
+		f.action="buy_ready1.do";
+		f.price.value = f.totPrice.value;
+		
+		f.submit();
 	}
 </script>
 

@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -24,5 +25,15 @@ public class BuyDAO {
 	}
 	public ProducerVO selectProducer(int idx) {
 		return session.selectOne("b.select_producer_name",idx);
+	}
+	public int insertOrder(List<OrderListVO> list) {
+		int res=0;
+		for (OrderListVO vo : list) {			
+			res+=session.insert("b.insertOrder",vo);
+		}
+		return res;
+	}
+	public Date Sysdate() {
+		return session.selectOne("b.sysdate");
 	}
 }

@@ -2,7 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +23,7 @@ import dao.BuyDAO;
 import util.Buy;
 import vo.FullViewVO;
 import vo.OrderListVO;
+import vo.UserVO;
 
 @Controller
 public class BuyController implements Buy {
@@ -52,6 +53,9 @@ public class BuyController implements Buy {
 		boolean isExist = false;
 		for (OrderListVO item : cart) {
 			if (item.getProduct_idx() == idx) {
+				cart.remove(item);
+				item.setProduct_amount(amount);
+				cart.add(item);
 				isExist = true;
 				break;
 			}
@@ -66,7 +70,6 @@ public class BuyController implements Buy {
 		try {
 			response.sendRedirect("cart.do");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -81,7 +84,6 @@ public class BuyController implements Buy {
 					i.setProduct_amount(j.getProduct_amount());
 			}
 		}
-		System.out.println(cart_in.size());
 		model.addAttribute("cart_in", cart_in);
 		return CART_IN;
 	}
@@ -98,11 +100,6 @@ public class BuyController implements Buy {
 			}
 		}
 		session.setAttribute("cart", cart);
-		List<FullViewVO> cart_in = new ArrayList<FullViewVO>();
-		if (cart.size() != 0) {
-			cart_in = buydao.selectProducts(cart);
-		}
-		model.addAttribute("cart_in", cart_in);
 	}
 
 	@RequestMapping(value = "/findProdcerName.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
@@ -122,7 +119,6 @@ public class BuyController implements Buy {
 	@ResponseBody
 	public void fixAmount(int idx, int amount, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		session.getAttribute("cart");
 		List<OrderListVO> cart = (List<OrderListVO>) (session.getAttribute("cart"));
 
 		for (OrderListVO item : cart) {
@@ -133,7 +129,63 @@ public class BuyController implements Buy {
 				break;
 			}
 		}
+
 		session.setAttribute("cart", cart);
 	}
 
+	@RequestMapping("/buy_ready1.do")
+	public String Buying(int amount, int idx, int price, HttpServletRequest request, HttpServletResponse response,
+			Model model) {
+		HttpSession session = request.getSession();
+		try {
+			UserVO user = (UserVO) session.getAttribute("user1");
+			List<OrderListVO> cart = new ArrayList<OrderListVO>();
+			OrderListVO item = new OrderListVO();
+			item.setUser_idx(user.getUser1_idx());
+			item.setOrderlist_date(buydao.Sysdate());
+			item.setProduct_amount(amount);
+			item.setProduct_idx(idx);
+			item.setOrderlist_addr(user.getUser1_addr());
+			cart.add(item);
+			buydao.insertOrder(cart);
+
+			session.removeAttribute("cart");
+			model.addAttribute("cost", price);
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+				response.sendRedirect("login.do");
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return BUY_READY;
+	}
+
+	@RequestMapping("/buy_readys.do")
+	public String Buying(int cost, HttpServletRequest request, HttpServletResponse response, Model model) {
+		HttpSession session = request.getSession();
+		try {
+			UserVO user = (UserVO) session.getAttribute("user1");
+			Date date=buydao.Sysdate();
+			List<OrderListVO> cart = (List<OrderListVO>) (session.getAttribute("cart"));
+			for (int i = 0; i < cart.size(); i++) {
+				OrderListVO item = cart.get(i);
+				item.setOrderlist_date(date);
+				item.setUser_idx(user.getUser1_idx());
+				item.setOrderlist_addr(user.getUser1_addr());
+			}
+			buydao.insertOrder(cart);
+			model.addAttribute("cost", cost);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+				response.sendRedirect("login.do");
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return BUY_READY;
+	}
 }

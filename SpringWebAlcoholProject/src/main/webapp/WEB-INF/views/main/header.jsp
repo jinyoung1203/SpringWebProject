@@ -138,7 +138,7 @@
                             <hr class="dropdown-divider">
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="cart.do">
                                 <span>장바구니 목록</span>
                             </a>
                         </li>

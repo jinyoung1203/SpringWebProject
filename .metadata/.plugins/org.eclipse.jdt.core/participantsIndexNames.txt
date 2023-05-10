@@ -1,9 +1,0 @@
-INDEX VERSION 1.131
-C:\embedded_yh\embedded_yh_jsp_spring\work2\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3833663495.index
-\SpringWebAlcoholProject\src\main\java
-C:\embedded_yh\embedded_yh_jsp_spring\work2\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\940251188.index
-\SpringWebAlcoholProject\src\main\java
-C:\embedded_yh\embedded_yh_jsp_spring\work2\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3958934392.index
-\SpringWebAlcoholProject\src\main\java
-C:\embedded_yh\embedded_yh_jsp_spring\work2\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3992302981.index
-\SpringWebAlcoholProject\src\main\java

@@ -1,16 +1,10 @@
 package controller;
 
-import naverlogin.NaverLoginBO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import util.Buy;
 import util.Common;
-
-import javax.servlet.http.HttpSession;
 
 @Controller
 public class MainController {
@@ -28,4 +22,7 @@ public class MainController {
     public String buy() {
     	return Buy.BUY;
     }
+
+
+
 } // end of class

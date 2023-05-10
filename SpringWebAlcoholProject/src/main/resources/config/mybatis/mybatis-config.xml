@@ -22,6 +22,7 @@
 		<mapper resource="config/mybatis/mapper/review.xml" />
 		<mapper resource="config/mybatis/mapper/buy.xml" />
 		<mapper resource="config/mybatis/mapper/review_lsj.xml" />
+		<mapper resource="config/mybatis/mapper/board.xml" />
 		<!-- <mapper resource="config/mybatis/mapper/board_update.xml" />
 		<mapper resource="config/mybatis/mapper/board_delete.xml" /> -->
 

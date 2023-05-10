@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 public class MainController {
     @RequestMapping("/")
     public String mainofmain(){
+    	System.out.println("main");
         return Common.Main.VIEW_PATH+"main_of_main.jsp";
     } // main of main()
 
@@ -28,4 +29,7 @@ public class MainController {
     public String buy() {
     	return Buy.BUY;
     }
+
+
+
 } // end of class

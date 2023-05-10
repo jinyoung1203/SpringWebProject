@@ -268,6 +268,8 @@
 								<option value="중간">중간</option>
 								<option value="강한">강한</option>
 							</div>
+						</div>
+							
 					</td>
 
 					<!-- 바디감 -->
@@ -283,17 +285,25 @@
 								<option value="중간">중간</option>
 								<option value="강한">강한</option>
 							</div>
+						</div>
 					</td>
-
+					<td>
+						<div>
+						<input class = "search_btn" type="button" value="검색" onclick="search();">
+						</div>
+					
+					</td>
+					
 				</tr>
 			</table>
 			
-			<input type="button" value="검색" onclick="search();">
-
-			<div align="right" class="right">
-				<input class="search" type="search" placeholder="검색어를 입력해주세요">
-				<input class="search_button" type="button" value="search">
-			</div>
+			<form>
+				<div align="right" class="right">
+	
+					<input name="search" class="search" type="search" placeholder="검색어를 입력해주세요">
+					<input name="search_btn" class="search_button" type="button" value="search" onclick="typing_search(this.form);">
+				</div>
+			</form>
 		</div>
 
 		<div class="head">
@@ -304,7 +314,8 @@
 
 
 		<!-- Full view -->
-		<table>
+		<div class="intinite">
+		<table >
 			<tr>
 				<c:forEach var="list" items="${ product_list }" varStatus="status">
 					<c:if test="${status.index%5==0}">
@@ -336,7 +347,7 @@
 				</c:forEach>
 			</tr>
 		</table>
-
+		</div>
 	</main>
 	<!-- End #main -->
 
@@ -375,6 +386,14 @@
 	<script>
 		var txt ="";
 		var servlet = "";
+		var select = [];
+		var pt = "";
+		var pad = "";
+		var pp = "";
+		var wr = "";
+		var sr = "";
+		var pr = "";
+		var pbr = "";
 		function text(param) {
 			if (param == '주종') {
 				txt = "주종";
@@ -519,6 +538,7 @@
 				},
 
 				setSelectionsString : function() {
+					
 					var selects = this.getSelectionsString().split(", ");
 					$(this.selector + ".multiselect > .title").attr("title",
 							selects);
@@ -528,6 +548,7 @@
 					if (selects.length > 6) {
 						var _selects = this.getSelectionsString().split(", ");
 						_selects = _selects.splice(0, 6);
+						alert(_selects);
 						$(this.selector + ".multiselect > .title > .text")
 								.text(_selects + " [...]");
 					} else {
@@ -566,22 +587,84 @@
 					} else if (txt == "바디감") {
 						menu = "product_bodytaste_rating";
 					}
-						servlet += "&"+menu+"="+this.selections[this.selections.length - 1];
-						
-						
-					
 					
 				
+					select = this.selections;
+					
+					if(txt == "주종"){
+						menu = "product_type";
+						if(select != null){
+							pt = "";
+							for(var i = 0; i<select.length; i++){
+								pt += "&product_type="+select[i];
+							}
+						}
+						//alert(pt);
+						
+					}else if (txt == "도수") {
+						menu = "product_alcohol_degree";
+						if(select != null){
+							pad = "";
+							for(var i = 0; i<select.length; i++){
+								pad += "&product_alcohol_degree="+select[i];
+							}
+						}
+						
+					} else if (txt == "가격") {
+						menu = "product_price"
+						if(select != null){
+							pp = "";
+							for(var i = 0; i<select.length; i++){
+								pp += "&product_price="+select[i];
+							}
+						}
+					} else if (txt == "단맛") {
+						menu = "product_sweet_rating";
+						if(select != null){
+							wr = "";
+							for(var i = 0; i<select.length; i++){
+								wr += "&product_sweet_rating="+select[i];
+							}
+						}
+					} else if (txt == "신맛") {
+						menu = "product_sourish_rating";
+						if(select != null){
+							sr = "";
+							for(var i = 0; i<select.length; i++){
+								sr += "&product_sourish_rating="+select[i];
+							}
+						}
+					} else if (txt == "탄산") {
+						menu = "product_sparkling_rating";
+						if(select != null){
+							pr = "";
+							for(var i = 0; i<select.length; i++){
+								pr += "&product_sparkling_rating="+select[i];
+							}
+						}
+					} else if (txt == "바디감") {
+						menu = "product_bodytaste_rating";
+						if(select != null){
+							pbr = "";
+							for(var i = 0; i<select.length; i++){
+								pbr += "&product_bodytaste_rating="+select[i];
+							}
+						}
+					}
+					
+					servlet = pt + pad + pp + wr + sr + pr + pbr;
+					
 					//alert(servlet);
-					
-					
 					
 					
 				},
 
 				getSelectionsString : function() {
-					if (this.selections.length > 0)
+				
+					if (this.selections.length > 0){
+						
 						return this.selections.join(", ");
+					}
 					else
 						return txt;
 				},
@@ -595,6 +678,7 @@
 					this.selections = arr;
 					this.selectionStatus();
 					this.setSelectionsString();
+				
 				},
 			};
 
@@ -629,11 +713,26 @@
 			}
 			
 			
-			
 		};	
 		
 			function search() {
+			
+				//lert(select);
+				
 				location.href = "search.do?"+servlet;
+			}
+			
+			function typing_search(f) {
+				let search = f.search.value;
+				
+				if(search == null || search.trim()==""){
+					alert("검색어를 입력해주세요");
+				}else{
+					f.action="typing_search.do";
+					f.submit();
+					
+				}
+				
 			}
 		    
 		

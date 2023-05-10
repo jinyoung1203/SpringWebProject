@@ -64,4 +64,9 @@ public class BoardService {
         return res;
     } // end of board_insert_reply
 
+    public int board_modify(BoardVO board_vo){
+        int res = boardDAO.modify(board_vo);
+        return res;
+    } // end of board_modify()
+
 } // end of class

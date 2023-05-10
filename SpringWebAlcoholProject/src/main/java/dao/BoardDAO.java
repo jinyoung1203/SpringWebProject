@@ -80,7 +80,10 @@ public class BoardDAO {
         return res;
     } // end of insert_reply()
 
-
+    public int modify(BoardVO board_vo){
+        int res = sqlSession.update("b.board_modify", board_vo);
+        return res;
+    } // end of modify()
 
 
 } // end of class

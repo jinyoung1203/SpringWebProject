@@ -91,7 +91,7 @@
                     </div>
                     <div class="card-footer text-end">
                         <c:if test="${user1.user1_idx eq user_vo.user1_idx}">
-                            <input type="button" class="btn btn-primary" value="수정하기"/>
+                            <input type="button" class="btn btn-primary" onclick="location.href='board_modify_form.do?board1_idx=${board_vo.board1_idx}&user1_idx=${user_vo.user1_idx}'" value="수정하기"/>
                             <input type="button" class="btn btn-danger" value="삭제하기">
                         </c:if>
                         <c:if test="${user1 ne null}">

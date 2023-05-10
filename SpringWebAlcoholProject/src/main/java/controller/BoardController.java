@@ -158,7 +158,7 @@ public class BoardController {
         int res = service.board_insert(board_vo);
         System.out.println("res : " + res);
 
-        return "redirect:/main.do";
+        return "redirect:/board_list.do";
     } // end of board_insert()
 
     @RequestMapping("board_reply_view.do")
@@ -233,4 +233,93 @@ public class BoardController {
         return "redirect:/board_detail_view.do?board1_idx=" + Integer.toString(originBoard_vo.getBoard1_idx()) + "&user1_idx=" + Integer.toString(originBoard_vo.getUser1_idx());
     } // end of board_reply_insert()
 
+    @RequestMapping("board_modify_form.do")
+    public String board_modify_form(Model model, int board1_idx, int user1_idx){
+        System.out.println("------ board_modify_form.do ------");
+        BoardVO board_vo = service.board_selectOne(board1_idx);
+        UserVO user_vo = service.user_selectOne(user1_idx);
+        System.out.println("board_vo : " + board_vo);
+        System.out.println("user_vo : " + user_vo);
+
+        model.addAttribute("board_vo", board_vo);
+        model.addAttribute("user_vo", user_vo);
+
+        return Common.Board.VIEW_PATH + "board_modify_form.jsp";
+    } // end of board_modify_form()
+
+    @RequestMapping("board_modify.do")
+    public String board_modify(BoardVO board_vo){
+        System.out.println("----- board_modify.do -----");
+        System.out.println("board_vo.board1_idx : " + board_vo.getBoard1_idx());
+
+        String webPath = "/resources/upload/";
+        String savePath = app.getRealPath(webPath);
+        System.out.println("절대경로 : " + savePath);
+
+        // 업로드된 파일 정보
+        MultipartFile board_photo = board_vo.getBoard1_photo();
+
+        String board_filename = "no_file";
+
+        if(!board_photo.isEmpty()){
+            // DB에 추가할 실제 파일 이름
+            board_filename = board_photo.getOriginalFilename();
+
+            // 파일을 저장할 절대경로
+            File saveFile = new File(savePath, board_filename);
+            if(!saveFile.exists()){
+                saveFile.mkdirs(); // 절대경로에 upload라는 이름의 폴더를 생성한다.
+                // 그냥 두면 이미지 파일이 만들어 지는게 아니라 폴더로 다 만들어 진다.
+            } else {
+                // 동일파일일 경우 현재 업로드 시간을 붙여서 이름변경
+                long time = System.currentTimeMillis();
+                board_filename = String.format("%d_%s", time, board_filename);
+                saveFile = new File(savePath, board_filename);
+            }
+
+            try {
+                // 업로드를 요청한 파일은 MultipartResolver클래스가 임시저장소에 보관한다.
+                // 임시 저장소에 보관된 파일은 일정 시간이 지나면 사라지므로, 절대경로 위치에
+                // 이미지를 물리적으로 복사해 넣어야 한다.
+                board_photo.transferTo(saveFile);
+
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        board_vo.setBoard1_filename(board_filename);
+
+        int res = service.board_modify(board_vo);
+
+        return "redirect:/board_detail.do?board1_idx=" + board_vo.getBoard1_idx() + "&user1_idx=" + board_vo.getUser1_idx();
+    } // end of board_modify()
+
 } // end of class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

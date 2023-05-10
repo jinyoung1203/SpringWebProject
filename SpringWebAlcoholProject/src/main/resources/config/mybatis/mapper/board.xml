@@ -69,4 +69,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 								  )
 	</insert>
 
+	<update id="board_modify" parameterType="vo.BoardVO">
+		update board1 set board1_subject = #{board1_subject},
+		                  board1_content = #{board1_content},
+		                  board1_regdate = sysdate,
+		                  board1_readhit = #{board1_readhit},
+		                  board1_ref = #{board1_ref},
+		                  board1_step = #{board1_step},
+		                  board1_depth = #{board1_depth},
+		                  user1_idx = #{user1_idx},
+		                  board1_filename = #{board1_filename}
+						  where board1_idx = #{board1_idx}
+	</update>
+
 </mapper>

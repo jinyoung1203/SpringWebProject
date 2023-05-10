@@ -32,5 +32,9 @@ public class Common {
 	public static class Review{
 		public static final String VIEW_PATH = "/WEB-INF/views/review/";
 	}
+	
+	public static class Event{
+		public static final String VIEW_PATH = "/WEB-INF/views/event/";
+	}
 
 } // end of class

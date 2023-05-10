@@ -87,8 +87,8 @@ pageContext.setAttribute("LF", "\n");
                             <div class="row gx-4 gx-lg-5">
                                 <div class="col-md-6 d-flex justify-content-center border border-primary">
                                     <img
-                                            src="${pageContext.request.contextPath}/resources/alcohol_image/${vo1.product_thumbnail_filename}"
-                                            alt="" class="img-fluid top_img">
+											src="${pageContext.request.contextPath}/resources/alcohol_image/${vo1.product_thumbnail_filename}"
+											alt="" class="img-fluid top_img">
                                 </div>
                                 <div class="col-md-6 right_box">
                                     <div class="d-flex"

@@ -157,7 +157,7 @@ pageContext.setAttribute("LF", "\n");
 									</div>
 								</div>
 								<div class="g">
-									<span class="gs">깰꼼함 : </span>
+									<span class="gs">깔끔함 : </span>
 									<div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="100"
 										aria-valuemin="0" aria-valuemax="100">
 										<div class="progress-bar" style="width: ${vo1.product_cleantaste_rating * 10}%">${vo1.product_cleantaste_rating}</div>
@@ -168,6 +168,19 @@ pageContext.setAttribute("LF", "\n");
 									<div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="100"
 										aria-valuemin="0" aria-valuemax="100">
 										<div class="progress-bar" style="width: ${vo1.product_bodytaste_rating * 10}%">${vo1.product_bodytaste_rating}</div>
+									</div>
+								</div>
+								<div class="g">
+									<span class="gs">탄산 : </span>
+									<div class="sp_g">
+										<c:choose>
+											<c:when test="${ vo1.product_sparkling_rating ne 0 }">
+												있음
+											</c:when>
+											<c:otherwise>
+												없음
+											</c:otherwise>
+										</c:choose>
 									</div>
 								</div>
 							</div>

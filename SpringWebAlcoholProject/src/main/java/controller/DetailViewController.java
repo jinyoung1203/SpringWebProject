@@ -76,6 +76,7 @@ public class DetailViewController {
 		List<FullViewVO> producer_list =  detailService.show_producer(vo);
 		int count = producer_list.size();
 		
+		model.addAttribute("producer_name", vo.getProducer_name());
 		model.addAttribute("product_count",count);
 		model.addAttribute("product_list",producer_list);
 		

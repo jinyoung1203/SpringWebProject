@@ -38,6 +38,6 @@ public class DetailService {
 
 		List<FullViewVO> list = detailViewDAO.show_producer(vo);
 		return list;
-	}
+	}//end of show_producer()
 
 } // end of class

@@ -151,6 +151,10 @@
 	margin: 40px 0;
 }
 
+.sp_g{
+	font : bold;
+}
+
 .btn-primary {
 	background: white !important;
 	border: 1px solid #c8c8c8 !important;

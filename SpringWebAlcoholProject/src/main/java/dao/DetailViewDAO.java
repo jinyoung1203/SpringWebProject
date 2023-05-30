@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import util.Common.full_view;
 import vo.FullViewVO;
+import vo.InsertVO_1;
 import vo.ReviewLsjVO;
 import vo.UserVO;
 
@@ -51,5 +52,26 @@ public class DetailViewDAO {
     	return list;
     	
     }
+    
+    public List<InsertVO_1> getProduct(){
+    	
+    	List<InsertVO_1> list = sqlSession.selectList("p.getProduct");
+    	
+    	return list;
+    }
+    
+    public int insertProduct(InsertVO_1 vo) {
+    	
+    	int res = sqlSession.update("p.insertProduct", vo);
+    	
+    	return res;
+    }
+
+	public int insertProducer(InsertVO_1 vo) {
+
+		int res = sqlSession.insert("p.insertProducer", vo);
+
+		return res;
+	}
 
 } // end of class

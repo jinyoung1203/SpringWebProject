@@ -5,6 +5,7 @@ import dao.FullViewDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vo.FullViewVO;
+import vo.InsertVO_1;
 import vo.ReviewLsjVO;
 
 import java.util.List;
@@ -39,5 +40,26 @@ public class DetailService {
 		List<FullViewVO> list = detailViewDAO.show_producer(vo);
 		return list;
 	}//end of show_producer()
+	
+	public List<InsertVO_1> getProduct(){
+		
+		List<InsertVO_1> list = detailViewDAO.getProduct();
+		
+		return list;
+	}
+	
+	public int insertProduct(InsertVO_1 vo) {
+		
+		int res = detailViewDAO.insertProduct(vo);
+		
+		return res;
+	}
+	
+	public int insertProducer(InsertVO_1 vo) {
+		
+		int res = detailViewDAO.insertProducer(vo);
+		
+		return res;
+	}
 
 } // end of class

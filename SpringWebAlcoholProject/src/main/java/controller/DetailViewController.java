@@ -8,6 +8,7 @@ import service.DetailService;
 import service.ReviewService;
 import util.Common;
 import vo.FullViewVO;
+import vo.InsertVO_1;
 import vo.ReviewLsjVO;
 
 import java.util.List;
@@ -71,16 +72,33 @@ public class DetailViewController {
 
 	@RequestMapping("/producerName.do")
 	public String showProducer(Model model, FullViewVO vo) {
-		
+
 		System.out.println(vo.getProducer_name());
-		List<FullViewVO> producer_list =  detailService.show_producer(vo);
+		List<FullViewVO> producer_list = detailService.show_producer(vo);
 		int count = producer_list.size();
-		
+
 		model.addAttribute("producer_name", vo.getProducer_name());
-		model.addAttribute("product_count",count);
-		model.addAttribute("product_list",producer_list);
-		
+		model.addAttribute("product_count", count);
+		model.addAttribute("product_list", producer_list);
+
 		return Common.full_view.VIEW_PATH + "full_view_lsj.jsp";
+	}
+
+	// 임시 데이터 추가 메서드 버그 해결 후 지우세요.
+	@RequestMapping("/insert_product_test.do")
+	public String insert_product_test() {
+
+		List<InsertVO_1> list = detailService.getProduct();
+		System.out.println(list.size());
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println("-------------");
+			list.get(i).setProducer_idx(i + 1);
+			System.out.println(list.get(i).getProducer_name());
+			System.out.println(list.get(i).getProducer_idx());
+			detailService.insertProduct(list.get(i));
+			detailService.insertProducer(list.get(i));
+		}
+		return Common.Main.VIEW_PATH + "main_of_main.jsp";
 	}
 
 } // end of class
